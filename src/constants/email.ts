@@ -99,12 +99,16 @@ ${p.reviewUrl}`,
     user: {
       subject: "We've received your quote request",
       plain: (_name: string, projectType: string, postcode: string) =>
-        `Thank you for your quote request — we have received your project details and our network of vetted tradespeople will be in touch shortly.
+        `Thank you for completing the form.
 
+Up to three fully vetted companies will contact you within 24 hours. Please look out for calls or emails from numbers you may not recognise.
+
+If you do not receive any contact, please email us and we will follow up with our panel of companies on your behalf.
+
+─────────────────────────
 Project:  ${projectType}
 Location: ${postcode}
-
-You can expect to receive up to 3 competitive quotes within 24 hours. All tradespeople on our platform are fully vetted and reviewed.`,
+─────────────────────────`,
     },
     admin: {
       subject: (projectType: string, postcode: string) =>
@@ -120,15 +124,22 @@ You can expect to receive up to 3 competitive quotes within 24 hours. All trades
       }) =>
         `NEW QUOTE REQUEST
 
+━━━━━━━━━━━━━━━━━━━━━━━━━
+CUSTOMER DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━
 Name:     ${p.name}
 Email:    ${p.email}
 Phone:    ${p.phone}
-Project:  ${p.projectType}
+
+PROJECT DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━
+Type:     ${p.projectType}
 Postcode: ${p.postcode}
 
 Description:
 ${p.description}
 
+━━━━━━━━━━━━━━━━━━━━━━━━━
 View in admin dashboard:
 ${p.reviewUrl}`,
     },

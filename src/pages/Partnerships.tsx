@@ -22,7 +22,7 @@ const PARTNER_OPTIONS = ["Letting agent", "Estate agent", "Commercial agent", "V
 
 const partnerSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100),
-  email: z.string().trim().email("Please enter a valid email").max(255),
+  email: z.string().trim().min(1, "Email is required").email("Please enter a valid email").max(255),
   phone: z.string().trim().min(7, "Please enter a valid phone").max(30),
   company: z.string().trim().min(2, "Please enter your company").max(150),
   partnerType: z.string().min(1).max(100),
@@ -57,6 +57,22 @@ export default function Partnerships() {
     }
 
     setSubmitting(true);
+
+    try {
+      await notifyPartnershipSubmitted({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        company: parsed.data.company,
+        partnerType: parsed.data.partnerType,
+        message: parsed.data.message,
+      });
+    } catch {
+      setSubmitting(false);
+      toast({ title: "Failed to send", description: "We couldn't submit your application. Please try again or email us directly.", variant: "destructive" });
+      return;
+    }
+
     const { error } = await supabase.from("contact_messages").insert({
       name: parsed.data.name,
       email: parsed.data.email,
@@ -67,18 +83,9 @@ export default function Partnerships() {
     setSubmitting(false);
 
     if (error) {
-      toast({ title: "Couldn't send", description: "Please try again or email us directly.", variant: "destructive" });
+      toast({ title: "Couldn't save your application", description: "Please try again or email us directly.", variant: "destructive" });
       return;
     }
-
-    notifyPartnershipSubmitted({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      company: parsed.data.company,
-      partnerType: parsed.data.partnerType,
-      message: parsed.data.message,
-    });
 
     toast({ title: "Application received", description: "Our partnerships team will be in touch within one working day." });
     setForm({ name: "", email: "", phone: "", company: "", partnerType: "Letting agent", message: "" });
@@ -236,8 +243,11 @@ export default function Partnerships() {
                   type="email"
                   maxLength={255}
                   value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-4 py-3 text-sm bg-warm-50 border border-warm-200 rounded-xl outline-none focus:border-oak-500 transition-colors"
+                  onChange={(e) => {
+                    setForm({ ...form, email: e.target.value });
+                    if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                  }}
+                  className={`w-full px-4 py-3 text-sm bg-warm-50 border rounded-xl outline-none focus:border-oak-500 transition-colors ${errors.email ? "border-destructive" : "border-warm-200"}`}
                 />
               </Field>
               <Field label="Phone" required error={errors.phone}>

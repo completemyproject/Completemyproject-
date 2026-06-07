@@ -19,9 +19,10 @@ import {
   Handshake,
   MessageSquare,
   FileCheck,
+  Mail,
 } from "lucide-react";
 import type { ContractorProfile } from "@/lib/auth";
-import { notifyAccountApproved, notifyAccountRejected } from "@/lib/emailService";
+import { notifyAccountApproved, notifyAccountRejected, sendCustomEmail, smtpTest } from "@/lib/emailService";
 import {
   fetchAdminContractorJobs,
   getDocumentSignedUrl,
@@ -56,7 +57,7 @@ type Enquiry = {
   created_at: string;
 };
 
-type AdminTab = "overview" | "applications" | "jobs" | "quotes" | "partnerships" | "contact";
+type AdminTab = "overview" | "applications" | "jobs" | "quotes" | "partnerships" | "contact" | "email";
 
 const ENQUIRY_STATUS_STYLE: Record<string, string> = {
   new: "bg-blue-50 text-blue-700 border-blue-200",
@@ -82,6 +83,11 @@ export default function Admin() {
   const [jobTradespersonFilter, setJobTradespersonFilter] = useState("all");
   const [jobInvoiceFilter, setJobInvoiceFilter] = useState<"all" | "with" | "without">("all");
   const [jobSearch, setJobSearch] = useState("");
+  const [emailConsoleTo, setEmailConsoleTo] = useState("");
+  const [emailConsoleSubject, setEmailConsoleSubject] = useState("");
+  const [emailConsoleText, setEmailConsoleText] = useState("");
+  const [emailConsoleHtml, setEmailConsoleHtml] = useState("");
+  const [sendingEmailConsole, setSendingEmailConsole] = useState(false);
   const [confirm, setConfirm] = useState<{
     title: string;
     description: string;
@@ -383,6 +389,41 @@ export default function Admin() {
     });
   };
 
+  const sendSmtpTest = async () => {
+    setSendingEmailConsole(true);
+    try {
+      await smtpTest();
+      toast.success("SMTP test email sent");
+    } catch (err) {
+      toast.error("SMTP test failed. Check the console for details.");
+      console.error(err);
+    } finally {
+      setSendingEmailConsole(false);
+    }
+  };
+
+  const sendCustomConsoleEmail = async () => {
+    setSendingEmailConsole(true);
+    try {
+      await sendCustomEmail({
+        to: emailConsoleTo,
+        subject: emailConsoleSubject,
+        text: emailConsoleText,
+        html: emailConsoleHtml,
+      });
+      toast.success("Custom email sent successfully");
+      setEmailConsoleTo("");
+      setEmailConsoleSubject("");
+      setEmailConsoleText("");
+      setEmailConsoleHtml("");
+    } catch (err) {
+      toast.error("Failed to send custom email. Check the console for details.");
+      console.error(err);
+    } finally {
+      setSendingEmailConsole(false);
+    }
+  };
+
   const navItems: { id: AdminTab; label: string; icon: typeof LayoutDashboard }[] = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "applications", label: "Trades accounts", icon: UserPlus },
@@ -390,6 +431,7 @@ export default function Admin() {
     { id: "quotes", label: "Get quotes", icon: FileCheck },
     { id: "partnerships", label: "Partnerships", icon: Handshake },
     { id: "contact", label: "Contact us", icon: MessageSquare },
+    { id: "email", label: "Email console", icon: Mail },
   ];
 
   const pageMeta: Record<AdminTab, { kicker: string; title: string }> = {
@@ -399,6 +441,7 @@ export default function Admin() {
     quotes: { kicker: "Leads", title: "Get quotes submissions" },
     partnerships: { kicker: "Partners", title: "Partnership applications" },
     contact: { kicker: "Inbox", title: "Contact form messages" },
+    email: { kicker: "Email", title: "Email console" },
   };
 
   const isLoading =
@@ -1022,6 +1065,99 @@ export default function Admin() {
                         <p className="text-ink-500 text-sm">Select an enquiry to view details</p>
                       </div>
                     )}
+                  </section>
+                </div>
+              )}
+
+              {tab === "email" && (
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
+                  <section className="bg-white rounded-2xl border border-warm-200 shadow-sm p-6">
+                    <div className="mb-5">
+                      <h2 className="font-display text-base font-extrabold text-ink-900">
+                        SMTP test
+                      </h2>
+                      <p className="text-sm text-ink-500 mt-2">
+                        Send a live SMTP test through the configured edge function and IONOS SMTP settings.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={sendSmtpTest}
+                      disabled={sendingEmailConsole}
+                      className="inline-flex items-center justify-center rounded-full bg-accent px-4 py-3 text-sm font-semibold text-ink-900 hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {sendingEmailConsole ? "Sending…" : "Send SMTP test email"}
+                    </button>
+                  </section>
+
+                  <section className="bg-white rounded-2xl border border-warm-200 shadow-sm p-6">
+                    <div className="mb-5">
+                      <h2 className="font-display text-base font-extrabold text-ink-900">
+                        Custom email
+                      </h2>
+                      <p className="text-sm text-ink-500 mt-2">
+                        Send an arbitrary custom email through the same SMTP gateway.
+                      </p>
+                    </div>
+                    <div className="space-y-4">
+                      <label className="block text-sm font-semibold text-ink-800">
+                        To
+                        <input
+                          type="email"
+                          value={emailConsoleTo}
+                          onChange={(event) => setEmailConsoleTo(event.target.value)}
+                          placeholder="recipient@example.com"
+                          className="mt-2 w-full rounded-xl border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-ink-900 focus:border-accent focus:ring-2 focus:ring-accent/20"
+                        />
+                      </label>
+
+                      <label className="block text-sm font-semibold text-ink-800">
+                        Subject
+                        <input
+                          type="text"
+                          value={emailConsoleSubject}
+                          onChange={(event) => setEmailConsoleSubject(event.target.value)}
+                          placeholder="Email subject"
+                          className="mt-2 w-full rounded-xl border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-ink-900 focus:border-accent focus:ring-2 focus:ring-accent/20"
+                        />
+                      </label>
+
+                      <label className="block text-sm font-semibold text-ink-800">
+                        Plain text body
+                        <textarea
+                          value={emailConsoleText}
+                          onChange={(event) => setEmailConsoleText(event.target.value)}
+                          placeholder="Write the plain-text email body here"
+                          rows={5}
+                          className="mt-2 w-full rounded-xl border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-ink-900 focus:border-accent focus:ring-2 focus:ring-accent/20"
+                        />
+                      </label>
+
+                      <label className="block text-sm font-semibold text-ink-800">
+                        Optional HTML body
+                        <textarea
+                          value={emailConsoleHtml}
+                          onChange={(event) => setEmailConsoleHtml(event.target.value)}
+                          placeholder="If provided, this HTML will be used instead of plain text formatting."
+                          rows={5}
+                          className="mt-2 w-full rounded-xl border border-warm-200 bg-warm-50 px-3 py-2 text-sm text-ink-900 focus:border-accent focus:ring-2 focus:ring-accent/20"
+                        />
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={sendCustomConsoleEmail}
+                        disabled={
+                          sendingEmailConsole ||
+                          !emailConsoleTo.trim() ||
+                          !emailConsoleSubject.trim() ||
+                          !emailConsoleText.trim()
+                        }
+                        className="inline-flex items-center justify-center rounded-full bg-ink-900 px-4 py-3 text-sm font-semibold text-white hover:bg-ink-800 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {sendingEmailConsole ? "Sending…" : "Send custom email"}
+                      </button>
+                    </div>
                   </section>
                 </div>
               )}

@@ -40,6 +40,7 @@ export default function GetQuotes() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onBlur",
     defaultValues: {
       name: "",
       email: "",
@@ -67,7 +68,6 @@ export default function GetQuotes() {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     try {
-      // Insert enquiry into database
       const { data: enquiryId, error } = await supabase.rpc("submit_enquiry", {
         p_name: data.name,
         p_email: data.email,
@@ -83,15 +83,22 @@ export default function GetQuotes() {
         return;
       }
 
-      notifyQuoteSubmitted({
-        enquiryId: String(enquiryId),
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        projectType: data.projectType,
-        postcode: data.postcode,
-        description: data.description,
-      });
+      try {
+        await notifyQuoteSubmitted({
+          enquiryId: String(enquiryId),
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          projectType: data.projectType,
+          postcode: data.postcode,
+          description: data.description,
+        });
+      } catch (emailErr) {
+        console.error("Email failed, rolling back enquiry:", emailErr);
+        await supabase.from("enquiries").delete().eq("id", enquiryId);
+        toast.error("We couldn't submit your quote request. Please try again.");
+        return;
+      }
 
       supabase.functions.invoke("notify-contractors", {
         body: { enquiry_id: enquiryId },
@@ -127,7 +134,7 @@ export default function GetQuotes() {
               Check your email for a confirmation. Remember — any agreement for work is made directly between you and the Service Provider.
             </p>
             <Link to="/">
-              <Button variant="hero" size="lg" className="px-8 py-6 text-base font-semibold">
+              <Button variant="hero" size="lg" className="px-8 py-6 text-base text-white font-semibold">
                 Back to Home
               </Button>
             </Link>

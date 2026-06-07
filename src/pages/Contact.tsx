@@ -18,7 +18,7 @@ const TOPICS = ["General enquiry", "Quote support", "Become a contractor", "Pres
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100, "Name too long"),
-  email: z.string().trim().email("Please enter a valid email").max(255),
+  email: z.string().trim().min(1, "Email is required").email("Please enter a valid email").max(255),
   phone: z.string().trim().max(30, "Phone too long").optional().or(z.literal("")),
   topic: z.string().min(1).max(100),
   message: z.string().trim().min(10, "Please add a few more details (min 10 chars)").max(2000, "Message too long"),
@@ -45,6 +45,21 @@ export default function Contact() {
     }
 
     setSubmitting(true);
+
+    try {
+      await notifyContactSubmitted({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        topic: parsed.data.topic,
+        message: parsed.data.message,
+      });
+    } catch {
+      setSubmitting(false);
+      toast({ title: "Failed to send", description: "We couldn't send your message. Please try again or email us directly.", variant: "destructive" });
+      return;
+    }
+
     const { error } = await supabase.from("contact_messages").insert({
       name: parsed.data.name,
       email: parsed.data.email,
@@ -55,17 +70,9 @@ export default function Contact() {
     setSubmitting(false);
 
     if (error) {
-      toast({ title: "Couldn't send", description: "Please try again or email us directly.", variant: "destructive" });
+      toast({ title: "Couldn't save your message", description: "Please try again or email us directly.", variant: "destructive" });
       return;
     }
-
-    notifyContactSubmitted({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      topic: parsed.data.topic,
-      message: parsed.data.message,
-    });
 
     toast({ title: "Message sent", description: "We'll get back to you within one working day." });
     setForm({ name: "", email: "", phone: "", topic: "General enquiry", message: "" });
@@ -159,8 +166,11 @@ export default function Contact() {
                       maxLength={255}
                       placeholder="e.g. john@example.com"
                       value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full px-4 py-3 text-sm bg-card border border-warm-200 rounded-xl outline-none focus:border-oak-500 transition-colors"
+                      onChange={(e) => {
+                        setForm({ ...form, email: e.target.value });
+                        if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                      }}
+                      className={`w-full px-4 py-3 text-sm bg-card border rounded-xl outline-none focus:border-oak-500 transition-colors ${errors.email ? "border-destructive" : "border-warm-200"}`}
                     />
                   </Field>
                 </div>

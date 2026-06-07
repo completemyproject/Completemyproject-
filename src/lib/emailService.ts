@@ -1,91 +1,70 @@
-import emailjs from "@emailjs/browser";
-import { ADMIN_EMAIL, BRAND_NAME } from "@/constants/email";
-import type { EmailMail, EmailPayload } from "@/lib/emailMessages";
-import {
-  buildAccountPendingReview,
-  buildAccountApproved,
-  buildAccountRejected,
-  buildTradeJobCreated,
-  buildQuoteSubmitted,
-  buildContactSubmitted,
-  buildPartnershipSubmitted,
-} from "@/lib/emailMessages";
+const EMAIL_API_URL = import.meta.env.VITE_EMAIL_API_URL ?? "http://localhost:4000/email/send";
+const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY ?? "";
 
-export { ADMIN_EMAIL, ADMIN_EMAILS, BRAND_NAME, EMAIL_COPY } from "@/constants/email";
+// Send app-generated email payloads to a dedicated nodemailer backend.
+// This avoids Supabase function JWT issues and sends emails directly through SMTP.
+export type EmailType =
+  | "smtp_test"
+  | "custom_email"
+  | "account_pending_review"
+  | "account_approved"
+  | "account_rejected"
+  | "trade_job_created"
+  | "quote_submitted"
+  | "contact_submitted"
+  | "partnership_submitted";
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "";
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "";
-const TEMPLATE_USER = import.meta.env.VITE_EMAILJS_TEMPLATE_USER ?? "";
-const TEMPLATE_ADMIN =
-  import.meta.env.VITE_EMAILJS_TEMPLATE_ADMIN ?? TEMPLATE_USER;
+export type EmailFunctionPayload = {
+  type: EmailType;
+  data: Record<string, unknown>;
+};
 
-function isConfigured(): boolean {
-  return Boolean(SERVICE_ID && PUBLIC_KEY && TEMPLATE_USER);
-}
-
-function templateParams(mail: EmailMail, recipient: string): Record<string, string> {
-  const to = recipient.trim();
-  if (!to) throw new Error("Recipient email is empty");
-
-  const name = mail.name.trim() || "Customer";
-  const request = mail.request.trim() || mail.subject;
-  const submitterEmail = mail.submitterEmail?.trim() ?? "";
-
-  return {
-    to_email: to,
-    email: to,
-    user_email: to,
-    to,
-    recipient: to,
-    subject: mail.subject,
-    message: mail.message,
-    body: mail.message,
-    content: mail.message,
-    name,
-    user_name: name,
-    first_name: name.split(/\s+/)[0] || name,
-    from_name: name,
-    request,
-    title: mail.subject,
-    company_name: BRAND_NAME,
-    submitter_email: submitterEmail,
-    reply_to: submitterEmail || ADMIN_EMAIL,
-    admin_email: ADMIN_EMAIL,
+async function invokeEmailFunction(payload: EmailFunctionPayload): Promise<void> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
   };
-}
-
-async function sendViaTemplate(templateId: string, mail: EmailMail, recipient: string): Promise<void> {
-  await emailjs.send(SERVICE_ID, templateId, templateParams(mail, recipient), {
-    publicKey: PUBLIC_KEY,
-  });
-}
-
-async function sendUserMail(mail: EmailMail): Promise<void> {
-  await sendViaTemplate(TEMPLATE_USER, mail, mail.to);
-}
-
-async function sendAdminMail(mail: Omit<EmailMail, "to"> & { to?: string }): Promise<void> {
-  const adminMail: EmailMail = { ...mail, to: mail.to ?? ADMIN_EMAIL };
-  await sendViaTemplate(TEMPLATE_ADMIN, adminMail, ADMIN_EMAIL);
-}
-
-async function dispatchPayload(payload: EmailPayload): Promise<void> {
-  if (!isConfigured()) {
-    console.warn(
-      "[email] EmailJS not configured. Add VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_PUBLIC_KEY, VITE_EMAILJS_TEMPLATE_USER to .env",
-    );
-    return;
+  if (EMAIL_API_KEY) {
+    headers["Authorization"] = `Bearer ${EMAIL_API_KEY}`;
+    headers["x-api-key"] = EMAIL_API_KEY;
   }
 
-  const tasks: Promise<void>[] = [];
-  if (payload.user) tasks.push(sendUserMail(payload.user));
-  if (payload.admin) tasks.push(sendAdminMail(payload.admin));
-  await Promise.all(tasks);
+  const res = await fetch(EMAIL_API_URL, {
+    method: "POST",
+    headers,
+    cache: "no-store",
+    body: JSON.stringify(payload),
+  });
+
+  const result = await res.json().catch(() => null);
+  if (!res.ok) {
+    const message = result?.error || result?.message || res.statusText;
+    throw new Error(`Email function request failed: ${message}`);
+  }
+  if (result?.error) {
+    throw new Error(result.error);
+  }
 }
 
-function send(payload: EmailPayload): void {
-  void dispatchPayload(payload).catch((err) => {
-    console.error("[email] send failed:", err);
+export async function sendEmailPayload(payload: EmailFunctionPayload): Promise<void> {
+  await invokeEmailFunction(payload);
+}
+
+export async function smtpTest(): Promise<void> {
+  await sendEmailPayload({ type: "smtp_test", data: {} });
+}
+
+export async function sendCustomEmail(data: {
+  to: string | string[];
+  subject: string;
+  text: string;
+  html?: string;
+}): Promise<void> {
+  await sendEmailPayload({ type: "custom_email", data });
+}
+
+function safeSendEmail(payload: EmailFunctionPayload): void {
+  void invokeEmailFunction(payload).catch((err) => {
+    console.error("[email] send-email function failed:", err);
   });
 }
 
@@ -96,7 +75,7 @@ export function notifyAccountPendingReview(data: {
   phone?: string;
   businessType?: string;
 }): void {
-  send(buildAccountPendingReview(data));
+  safeSendEmail({ type: "account_pending_review", data });
 }
 
 export function notifyAccountApproved(data: {
@@ -104,7 +83,7 @@ export function notifyAccountApproved(data: {
   contactName: string;
   businessName: string;
 }): void {
-  send(buildAccountApproved(data));
+  safeSendEmail({ type: "account_approved", data });
 }
 
 export function notifyAccountRejected(data: {
@@ -112,7 +91,7 @@ export function notifyAccountRejected(data: {
   contactName: string;
   businessName: string;
 }): void {
-  send(buildAccountRejected(data));
+  safeSendEmail({ type: "account_rejected", data });
 }
 
 export function notifyTradeJobCreated(data: {
@@ -124,10 +103,10 @@ export function notifyTradeJobCreated(data: {
   inspectionDate?: string;
   comments?: string;
 }): void {
-  send(buildTradeJobCreated(data));
+  safeSendEmail({ type: "trade_job_created", data });
 }
 
-export function notifyQuoteSubmitted(data: {
+export async function notifyQuoteSubmitted(data: {
   enquiryId: string;
   name: string;
   email: string;
@@ -135,27 +114,27 @@ export function notifyQuoteSubmitted(data: {
   projectType: string;
   postcode: string;
   description: string;
-}): void {
-  send(buildQuoteSubmitted(data));
+}): Promise<void> {
+  await sendEmailPayload({ type: "quote_submitted", data });
 }
 
-export function notifyContactSubmitted(data: {
+export async function notifyContactSubmitted(data: {
   name: string;
   email: string;
   phone?: string;
   topic: string;
   message: string;
-}): void {
-  send(buildContactSubmitted(data));
+}): Promise<void> {
+  await sendEmailPayload({ type: "contact_submitted", data });
 }
 
-export function notifyPartnershipSubmitted(data: {
+export async function notifyPartnershipSubmitted(data: {
   name: string;
   email: string;
   phone: string;
   company: string;
   partnerType: string;
   message: string;
-}): void {
-  send(buildPartnershipSubmitted(data));
+}): Promise<void> {
+  await sendEmailPayload({ type: "partnership_submitted", data });
 }
