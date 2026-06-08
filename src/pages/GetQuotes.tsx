@@ -296,7 +296,7 @@ export default function GetQuotes() {
                     type="submit" 
                     variant="hero" 
                     size="lg" 
-                    className="w-full text-base font-semibold py-6"
+                    className="w-full text-base text-white font-semibold py-6"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Submitting..." : "Get My Free Quotes"}

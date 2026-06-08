@@ -143,6 +143,7 @@ export const QUICK_SEARCH_CHIPS = [
   "Plumbing",
   "Electrical",
   "Garden",
+  "Other",
 ] as const;
 
 /** Maps hero quick chips to service titles used in /get-quotes?projects= */
@@ -208,6 +209,7 @@ export const CHIP_TO_PROJECT: Record<string, string> = {
   Plumbing: "New Plumbing Systems",
   Electrical: "Full Electrical Rewire",
   Garden: "Tree Surgery",
+  Other: "Other",
 };
 
 export type HeroSearchSuggestion = {

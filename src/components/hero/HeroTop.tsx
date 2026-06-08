@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShieldCheck, Umbrella, RefreshCw } from "lucide-react";
+import { ShieldCheck, Umbrella, RefreshCw, Clock } from "lucide-react";
 import heroPromo from "@/assets/hero-phone-promo.png";
 import { QUICK_SEARCH_CHIPS } from "@/data/services";
 import { HeroSearchBox } from "@/components/hero/HeroSearchBox";
@@ -122,10 +122,10 @@ export default function HeroTop({
             </div>
 
             <div className="mt-6 flex flex-row flex-nowrap justify-center gap-2 sm:gap-3 max-w-[20rem] mx-auto">
-              <a
-                href="#"
-                aria-label="Download on the App Store"
-                className="flex-1 inline-flex items-center justify-center gap-2 bg-ink-900 text-warm-50 rounded-xl px-3 py-2.5 hover:-translate-y-0.5 hover:shadow-lifted transition-all shadow-soft"
+              <span
+                aria-label="Download on the App Store — coming soon"
+                aria-disabled="true"
+                className="group relative flex-1 inline-flex items-center justify-center gap-2 bg-ink-900 text-warm-50 rounded-xl px-3 py-2.5 cursor-not-allowed shadow-soft"
               >
                 <svg viewBox="0 0 24 24" className="w-6 h-6 shrink-0 fill-current" aria-hidden>
                   <path d="M16.365 1.43c0 1.14-.42 2.22-1.12 3.02-.74.86-1.95 1.52-3.04 1.45-.13-1.11.42-2.27 1.1-3.02.78-.85 2.07-1.5 3.06-1.45zM20.5 17.32c-.55 1.27-.82 1.84-1.53 2.96-1 1.57-2.4 3.53-4.13 3.55-1.54.02-1.94-1-4.03-.99-2.09.01-2.53 1.01-4.07.99-1.74-.02-3.07-1.79-4.07-3.36C-.27 16.4-.6 11.32 1.6 8.6c1.55-1.94 4-3.07 6.3-3.07 2.34 0 3.81 1.28 5.74 1.28 1.88 0 3.02-1.28 5.72-1.28 2.04 0 4.21 1.11 5.76 3.03-5.06 2.77-4.24 10.01-4.62 8.76z"/>
@@ -134,11 +134,15 @@ export default function HeroTop({
                   <span className="text-[8px] uppercase tracking-wider opacity-75">Download on the</span>
                   <span className="text-xs font-display font-bold">App Store</span>
                 </span>
-              </a>
-              <a
-                href="#"
-                aria-label="Get it on Google Play"
-                className="flex-1 inline-flex items-center justify-center gap-2 bg-ink-900 text-warm-50 rounded-xl px-3 py-2.5 hover:-translate-y-0.5 hover:shadow-lifted transition-all shadow-soft"
+                <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap inline-flex items-center gap-1.5 bg-ink-900 text-warm-50 text-[11px] font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lifted">
+                  <Clock className="w-3 h-3" />
+                  Coming soon
+                </span>
+              </span>
+              <span
+                aria-label="Get it on Google Play — coming soon"
+                aria-disabled="true"
+                className="group relative flex-1 inline-flex items-center justify-center gap-2 bg-ink-900 text-warm-50 rounded-xl px-3 py-2.5 cursor-not-allowed shadow-soft"
               >
                 <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" aria-hidden>
                   <path fill="#34A853" d="M3.6 2.3 16.8 15.5l3.5-3.5L4.5 1.9c-.3-.1-.6-.1-.9.4z"/>
@@ -150,7 +154,11 @@ export default function HeroTop({
                   <span className="text-[8px] uppercase tracking-wider opacity-75">Get it on</span>
                   <span className="text-xs font-display font-bold">Google Play</span>
                 </span>
-              </a>
+                <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap inline-flex items-center gap-1.5 bg-ink-900 text-warm-50 text-[11px] font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lifted">
+                  <Clock className="w-3 h-3" />
+                  Coming soon
+                </span>
+              </span>
             </div>
           </div>
         </div>

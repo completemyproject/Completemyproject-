@@ -41,7 +41,7 @@ export default function OurStory() {
       {/* The story */}
       <section className="py-20 sm:py-24 bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid  items-center">
             {/* Text content */}
             <div className="relative bg-warm-50 border border-warm-200 rounded-3xl p-8 sm:p-10 shadow-soft order-2 lg:order-1">
               <Quote className="absolute -top-5 left-8 w-10 h-10 text-oak-500 bg-card p-2 rounded-full border border-warm-200" />
@@ -73,18 +73,7 @@ export default function OurStory() {
               </div>
             </div>
 
-            {/* Founder image */}
-            <div className="order-1 lg:order-2">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-oak-500/20 to-oak-600/10 rounded-3xl blur-2xl" />
-                <img
-                  src={founderImage}
-                  alt="Founder - Property landlord and entrepreneur"
-                  className="relative w-full h-auto rounded-2xl shadow-soft object-cover aspect-[4/5]"
-                  loading="lazy"
-                />
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>

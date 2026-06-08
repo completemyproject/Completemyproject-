@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { Gift, ArrowRight } from "lucide-react";
+import { Gift, Clock } from "lucide-react";
 
 const REFERRAL_STEPS = [
   "Share your unique referral link with a friend",
@@ -8,8 +7,6 @@ const REFERRAL_STEPS = [
 ];
 
 export default function ReferAFriend() {
-  const navigate = useNavigate();
-
   return (
     <section aria-labelledby="refer-heading" className="py-16 sm:py-20 lg:py-24 bg-warm-100/50 border-y border-warm-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
@@ -44,14 +41,13 @@ export default function ReferAFriend() {
                   </li>
                 ))}
               </ol>
-              <button
-                type="button"
-                onClick={() => navigate("/get-quotes")}
-                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-5 py-3 rounded-full text-sm transition-colors"
+              <span
+                aria-label="Referral programme coming soon"
+                className="inline-flex items-center gap-2 bg-muted text-muted-foreground font-semibold px-5 py-3 rounded-full text-sm cursor-not-allowed"
               >
-                Refer a Friend Now
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <Clock className="w-4 h-4" />
+                Coming soon
+              </span>
             </div>
 
             <div aria-hidden className="hidden md:flex flex-col items-center justify-between py-4 relative">
