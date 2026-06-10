@@ -23,7 +23,7 @@ const formSchema = z.object({
   phone: z.string().trim().min(10, "Please enter a valid phone number").max(20),
   postcode: z.string().trim().min(5, "Please enter a valid postcode").max(10),
   projectType: z.string().min(1, "Please select a project type"),
-  description: z.string().trim().min(20, "Please describe your project in at least 20 characters").max(2000, "Description must be less than 2000 characters"),
+  description: z.string().trim().min(1, "Please describe your project").max(2000, "Description must be less than 2000 characters"),
   termsAccepted: z.literal(true, {
     errorMap: () => ({ message: "You must accept the terms to continue" }),
   }),
@@ -128,7 +128,7 @@ export default function GetQuotes() {
               You're All Set!
             </h1>
             <p className="text-muted-foreground text-lg mb-3">
-              We've received your project details. Our vetted tradespeople will review your job and you'll receive up to 3 competitive quotes within 24 hours.
+              Your project details have been received and will be reviewed by our carefully vetted multi-trade contractors. Based on your requirements, up to three suitable companies will contact you within 48 hours to discuss your project.
             </p>
             <p className="text-muted-foreground text-sm mb-8">
               Check your email for a confirmation. Remember — any agreement for work is made directly between you and the Service Provider.
