@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
+  addJobInvoices,
   createContractorJob,
   deleteContractorDocument,
   deleteContractorJob,
@@ -101,6 +102,26 @@ export function useContractorJobs(userId: string | undefined, enabled: boolean) 
     setDocuments((prev) => prev.filter((d) => d.id !== document.id));
   };
 
+  const addInvoicesToJob = async (jobId: string, files: File[]) => {
+    if (!userId) throw new Error("Not signed in");
+    const existingCount = jobs.find((j) => j.id === jobId)?.contractor_documents.length ?? 0;
+    setSaving(true);
+    try {
+      const uploaded = await addJobInvoices(userId, jobId, existingCount, files);
+      setJobs((prev) =>
+        prev.map((j) =>
+          j.id === jobId
+            ? { ...j, contractor_documents: [...j.contractor_documents, ...uploaded] }
+            : j,
+        ),
+      );
+      setDocuments((prev) => [...uploaded, ...prev]);
+      return uploaded;
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return {
     jobs,
     documents,
@@ -112,5 +133,6 @@ export function useContractorJobs(userId: string | undefined, enabled: boolean) 
     removeJob,
     uploadDocuments,
     removeDocument,
+    addInvoicesToJob,
   };
 }

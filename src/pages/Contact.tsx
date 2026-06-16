@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyContactSubmitted } from "@/lib/emailService";
@@ -22,13 +23,14 @@ const contactSchema = z.object({
   phone: z.string().trim().max(30, "Phone too long").optional().or(z.literal("")),
   topic: z.string().min(1).max(100),
   message: z.string().trim().min(10, "Please add a few more details (min 10 chars)").max(2000, "Message too long"),
+  agreeToPrivacy: z.literal(true, { errorMap: () => ({ message: "You must agree to the Privacy Policy to continue" }) }),
 });
 
 export default function Contact() {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "General enquiry", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "General enquiry", message: "", agreeToPrivacy: false });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,7 +77,7 @@ export default function Contact() {
     }
 
     toast({ title: "Message sent", description: "We'll get back to you within one working day." });
-    setForm({ name: "", email: "", phone: "", topic: "General enquiry", message: "" });
+    setForm({ name: "", email: "", phone: "", topic: "General enquiry", message: "", agreeToPrivacy: false });
   };
 
   return (
@@ -208,9 +210,22 @@ export default function Contact() {
                   />
                 </Field>
 
-                <p className="text-xs text-muted-foreground mt-4 mb-6 leading-relaxed">
-                  By submitting, you agree to our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>. We'll never share your details with anyone outside our vetted panel.
-                </p>
+                <div className="mt-4 mb-6">
+                  <label className="flex items-start gap-2.5 cursor-pointer">
+                    <Checkbox
+                      checked={form.agreeToPrivacy}
+                      onCheckedChange={(checked) => {
+                        setForm({ ...form, agreeToPrivacy: checked === true });
+                        if (errors.agreeToPrivacy) setErrors((prev) => ({ ...prev, agreeToPrivacy: "" }));
+                      }}
+                      className="mt-0.5"
+                    />
+                    <span className="text-xs text-muted-foreground leading-relaxed">
+                      By submitting, you agree to our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>. We'll never share your details with anyone outside our vetted panel.
+                    </span>
+                  </label>
+                  {errors.agreeToPrivacy && <span className="block mt-1.5 text-xs text-destructive">{errors.agreeToPrivacy}</span>}
+                </div>
 
                 <button
                   type="submit"

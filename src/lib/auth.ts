@@ -1,6 +1,8 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 
+const APP_URL = (import.meta.env.VITE_APP_URL || window.location.origin).replace(/\/$/, "");
+
 export type AppRole = Database["public"]["Enums"]["app_role"];
 export type ContractorProfile = Database["public"]["Tables"]["contractor_profiles"]["Row"];
 export type ContractorStatus = ContractorProfile["status"];
@@ -135,7 +137,7 @@ export async function signUpContractor(payload: ContractorSignupPayload) {
     email,
     password: payload.password,
     options: {
-      emailRedirectTo: `${window.location.origin}/trades-login`,
+      emailRedirectTo: `${APP_URL}/trades-login`,
       data: {
         account_type: "contractor",
         business_name: payload.businessName.trim(),
@@ -151,6 +153,16 @@ export async function signUpContractor(payload: ContractorSignupPayload) {
 
 export async function signOut() {
   return supabase.auth.signOut();
+}
+
+export async function requestPasswordReset(email: string) {
+  return supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
+    redirectTo: `${APP_URL}/trades-reset-password`,
+  });
+}
+
+export async function updatePassword(password: string) {
+  return supabase.auth.updateUser({ password });
 }
 
 export function mapAuthError(message: string): string {

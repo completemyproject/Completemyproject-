@@ -9,6 +9,7 @@ import {
   resolveContractorAccess,
   signInWithEmail,
   signUpContractor,
+  requestPasswordReset,
   mapAuthError,
 } from "@/lib/auth";
 import { notifyAccountPendingReview } from "@/lib/emailService";
@@ -23,6 +24,9 @@ export default function TradesLogin() {
   const [checkingSession, setCheckingSession] = useState(true);
 
   const [login, setLogin] = useState({ email: "", password: "" });
+  const [forgotMode, setForgotMode] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotSent, setForgotSent] = useState(false);
   const [signup, setSignup] = useState({
     businessName: "",
     companyNumber: "",
@@ -99,6 +103,39 @@ export default function TradesLogin() {
 
     toast({ title: "Welcome back", description: "Loading your dashboard..." });
     navigate("/trades-dashboard", { replace: true });
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!forgotEmail.trim()) {
+      toast({
+        title: "Missing email",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    const { error } = await requestPasswordReset(forgotEmail);
+    setLoading(false);
+
+    if (error) {
+      toast({
+        title: "Could not send reset link",
+        description: mapAuthError(error.message),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setForgotSent(true);
+  };
+
+  const resetForgotState = () => {
+    setForgotMode(false);
+    setForgotSent(false);
+    setForgotEmail("");
   };
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -229,7 +266,10 @@ export default function TradesLogin() {
             <div className="grid grid-cols-2 border-b border-warm-200">
               <button
                 type="button"
-                onClick={() => setTab("login")}
+                onClick={() => {
+                  setTab("login");
+                  resetForgotState();
+                }}
                 className={`py-3.5 text-sm font-semibold tracking-wide transition ${
                   tab === "login"
                     ? "bg-warm-50 text-ink-900 border-b-2 border-accent -mb-px"
@@ -240,7 +280,10 @@ export default function TradesLogin() {
               </button>
               <button
                 type="button"
-                onClick={() => setTab("signup")}
+                onClick={() => {
+                  setTab("signup");
+                  resetForgotState();
+                }}
                 className={`py-3.5 text-sm font-semibold tracking-wide transition ${
                   tab === "signup"
                     ? "bg-warm-50 text-ink-900 border-b-2 border-accent -mb-px"
@@ -252,7 +295,62 @@ export default function TradesLogin() {
             </div>
 
             <div className="p-6 sm:p-8">
-              {tab === "login" ? (
+              {tab === "login" && forgotMode ? (
+                forgotSent ? (
+                  <div className="space-y-4 text-center py-4">
+                    <p className="text-sm text-ink-900 font-semibold">Check your email</p>
+                    <p className="text-sm text-ink-500">
+                      If an account exists for <span className="font-medium text-ink-900">{forgotEmail.trim()}</span>,
+                      we&apos;ve sent a link to reset your password.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={resetForgotState}
+                      className="text-accent font-semibold text-sm hover:underline"
+                    >
+                      Back to login
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleForgotPassword} className="space-y-4">
+                    <div>
+                      <p className="text-sm text-ink-500 mb-4">
+                        Enter the email address for your account and we&apos;ll send you a link to reset your
+                        password.
+                      </p>
+                      <label className={labelCls} htmlFor="forgot-email">
+                        Email address
+                      </label>
+                      <input
+                        id="forgot-email"
+                        type="email"
+                        autoComplete="email"
+                        value={forgotEmail}
+                        onChange={(e) => setForgotEmail(e.target.value)}
+                        className={inputCls}
+                        placeholder="you@company.co.uk"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 disabled:opacity-60 text-accent-foreground font-semibold h-12 rounded-xl text-sm transition shadow-lifted"
+                    >
+                      {loading ? "Sending..." : "Send reset link"}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                    <p className="text-xs text-ink-500 text-center pt-2">
+                      <button
+                        type="button"
+                        onClick={resetForgotState}
+                        className="text-accent font-semibold hover:underline"
+                      >
+                        Back to login
+                      </button>
+                    </p>
+                  </form>
+                )
+              ) : tab === "login" ? (
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div>
                     <label className={labelCls} htmlFor="login-email">
@@ -269,9 +367,22 @@ export default function TradesLogin() {
                     />
                   </div>
                   <div>
-                    <label className={labelCls} htmlFor="login-password">
-                      Password
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className={labelCls + " mb-0"} htmlFor="login-password">
+                        Password
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setForgotEmail(login.email);
+                          setForgotMode(true);
+                          setForgotSent(false);
+                        }}
+                        className="text-xs font-semibold text-accent hover:underline"
+                      >
+                        Forgot password?
+                      </button>
+                    </div>
                     <input
                       id="login-password"
                       type="password"

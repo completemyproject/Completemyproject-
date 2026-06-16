@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Handshake, ShieldCheck, Building2, Home, Briefcase, Calculator, PencilRuler, Package } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyPartnershipSubmitted } from "@/lib/emailService";
@@ -27,6 +28,7 @@ const partnerSchema = z.object({
   company: z.string().trim().min(2, "Please enter your company").max(150),
   partnerType: z.string().min(1).max(100),
   message: z.string().trim().min(10, "Please add a few more details (min 10 chars)").max(2000),
+  agreeToPrivacy: z.literal(true, { errorMap: () => ({ message: "You must agree to the Privacy Policy to continue" }) }),
 });
 
 export default function Partnerships() {
@@ -40,6 +42,7 @@ export default function Partnerships() {
     company: "",
     partnerType: "Letting agent",
     message: "",
+    agreeToPrivacy: false,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,7 +91,7 @@ export default function Partnerships() {
     }
 
     toast({ title: "Application received", description: "Our partnerships team will be in touch within one working day." });
-    setForm({ name: "", email: "", phone: "", company: "", partnerType: "Letting agent", message: "" });
+    setForm({ name: "", email: "", phone: "", company: "", partnerType: "Letting agent", message: "", agreeToPrivacy: false });
   };
 
   return (
@@ -222,6 +225,7 @@ export default function Partnerships() {
               <Field label="Full name" required error={errors.name}>
                 <input
                   maxLength={100}
+                  placeholder="e.g. John Smith"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full px-4 py-3 text-sm bg-warm-50 border border-warm-200 rounded-xl outline-none focus:border-oak-500 transition-colors"
@@ -230,6 +234,7 @@ export default function Partnerships() {
               <Field label="Company" required error={errors.company}>
                 <input
                   maxLength={150}
+                  placeholder="e.g. Smith & Co Lettings"
                   value={form.company}
                   onChange={(e) => setForm({ ...form, company: e.target.value })}
                   className="w-full px-4 py-3 text-sm bg-warm-50 border border-warm-200 rounded-xl outline-none focus:border-oak-500 transition-colors"
@@ -242,6 +247,7 @@ export default function Partnerships() {
                 <input
                   type="email"
                   maxLength={255}
+                  placeholder="e.g. john@example.com"
                   value={form.email}
                   onChange={(e) => {
                     setForm({ ...form, email: e.target.value });
@@ -254,6 +260,7 @@ export default function Partnerships() {
                 <input
                   type="tel"
                   maxLength={30}
+                  placeholder="e.g. 07700 900123"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   className="w-full px-4 py-3 text-sm bg-warm-50 border border-warm-200 rounded-xl outline-none focus:border-oak-500 transition-colors"
@@ -286,9 +293,22 @@ export default function Partnerships() {
               />
             </Field>
 
-            <p className="text-xs text-muted-foreground mt-4 mb-6 leading-relaxed">
-              By submitting, you agree to our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>. We'll only use your details to discuss the partnership.
-            </p>
+            <div className="mt-4 mb-6">
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <Checkbox
+                  checked={form.agreeToPrivacy}
+                  onCheckedChange={(checked) => {
+                    setForm({ ...form, agreeToPrivacy: checked === true });
+                    if (errors.agreeToPrivacy) setErrors((prev) => ({ ...prev, agreeToPrivacy: "" }));
+                  }}
+                  className="mt-0.5"
+                />
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  By submitting, you agree to our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>. We'll only use your details to discuss the partnership.
+                </span>
+              </label>
+              {errors.agreeToPrivacy && <span className="block mt-1.5 text-xs text-destructive">{errors.agreeToPrivacy}</span>}
+            </div>
 
             <button
               type="submit"

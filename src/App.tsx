@@ -18,6 +18,7 @@ import Careers from "./pages/Careers";
 import Partnerships from "./pages/Partnerships";
 import Faq from "./pages/Faq";
 import TradesLogin from "./pages/TradesLogin";
+import TradesResetPassword from "./pages/TradesResetPassword";
 import TradesDashboard from "./pages/TradesDashboard";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/trades-login" element={<TradesLogin />} />
+          <Route path="/trades-reset-password" element={<TradesResetPassword />} />
           <Route path="/trades-dashboard" element={<TradesDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

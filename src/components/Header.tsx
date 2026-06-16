@@ -11,6 +11,7 @@ const navItems = [
   { label: "Blog", to: "/blog" },
   { label: "Careers", to: "/careers" },
   { label: "Contact Us", to: "/contact" },
+  { label: "Trade Login", to: "/trades-login" },
 ];
 
 export default function Header() {

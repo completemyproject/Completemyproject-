@@ -12,7 +12,10 @@ export type EmailType =
   | "trade_job_created"
   | "quote_submitted"
   | "contact_submitted"
-  | "partnership_submitted";
+  | "partnership_submitted"
+  | "referral_submitted"
+  | "referral_status_updated"
+  | "quote_status_updated";
 
 export type EmailFunctionPayload = {
   type: EmailType;
@@ -137,4 +140,31 @@ export async function notifyPartnershipSubmitted(data: {
   message: string;
 }): Promise<void> {
   await sendEmailPayload({ type: "partnership_submitted", data });
+}
+
+export async function notifyReferralSubmitted(data: {
+  referrerName: string;
+  referrerEmail: string;
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+}): Promise<void> {
+  await sendEmailPayload({ type: "referral_submitted", data });
+}
+
+export function notifyReferralStatusUpdated(data: {
+  referrerName: string;
+  referrerEmail: string;
+  clientName: string;
+  status: string;
+}): void {
+  safeSendEmail({ type: "referral_status_updated", data });
+}
+
+/** Syncs the enquiry's status to the "Status" column in the Google Sheet. */
+export function notifyEnquiryStatusUpdated(data: {
+  enquiryId: string;
+  status: string;
+}): void {
+  safeSendEmail({ type: "quote_status_updated", data });
 }

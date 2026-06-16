@@ -13,6 +13,9 @@ type Props = {
   renderListMeta: (m: ContactMessage) => ReactNode;
   renderDetailExtra: (m: ContactMessage) => ReactNode;
   getMessageBody: (m: ContactMessage) => string;
+  headerExtra?: ReactNode;
+  renderListBadge?: (m: ContactMessage) => ReactNode;
+  renderDetailHeaderExtra?: (m: ContactMessage) => ReactNode;
 };
 
 export function AdminSplitInbox({
@@ -25,6 +28,9 @@ export function AdminSplitInbox({
   renderListMeta,
   renderDetailExtra,
   getMessageBody,
+  headerExtra,
+  renderListBadge,
+  renderDetailHeaderExtra,
 }: Props) {
   const showMobileDetail = Boolean(selected);
 
@@ -38,6 +44,7 @@ export function AdminSplitInbox({
         <div className="p-4 border-b border-warm-100">
           <h2 className="font-display text-sm font-extrabold text-ink-900">{listTitle}</h2>
           <p className="text-xs text-ink-500 mt-1">{listSubtitle}</p>
+          {headerExtra && <div className="mt-3">{headerExtra}</div>}
         </div>
         <div className="max-h-[min(50vh,28rem)] lg:max-h-[calc(100vh-280px)] overflow-y-auto divide-y divide-warm-100">
           {messages.length === 0 ? (
@@ -54,7 +61,10 @@ export function AdminSplitInbox({
                     : "hover:bg-warm-50"
                 }`}
               >
-                <p className="font-semibold text-ink-900 text-sm truncate">{m.name}</p>
+                <div className="flex items-start justify-between gap-2">
+                  <p className="font-semibold text-ink-900 text-sm truncate min-w-0">{m.name}</p>
+                  {renderListBadge?.(m)}
+                </div>
                 <p className="text-xs text-ink-500 truncate">{m.email}</p>
                 {renderListMeta(m)}
               </button>
@@ -69,9 +79,12 @@ export function AdminSplitInbox({
         {selected ? (
           <div className="bg-white rounded-2xl border border-warm-200 shadow-sm p-4 sm:p-6">
             <AdminDetailBack onBack={() => onSelect(null)} />
-            <h2 className="font-display text-lg sm:text-xl font-extrabold text-ink-900 mb-4 break-words">
-              {selected.name}
-            </h2>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-3 mb-4">
+              <h2 className="font-display text-lg sm:text-xl font-extrabold text-ink-900 break-words min-w-0">
+                {selected.name}
+              </h2>
+              {renderDetailHeaderExtra?.(selected)}
+            </div>
             {renderDetailExtra(selected)}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-sm">
               <div className="min-w-0">

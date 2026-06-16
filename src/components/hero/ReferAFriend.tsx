@@ -1,4 +1,5 @@
-import { Gift, Clock } from "lucide-react";
+import { Gift, ArrowRight } from "lucide-react";
+import ReferAFriendDialog from "./ReferAFriendDialog";
 
 const REFERRAL_STEPS = [
   "Share your unique referral link with a friend",
@@ -41,13 +42,14 @@ export default function ReferAFriend() {
                   </li>
                 ))}
               </ol>
-              <span
-                aria-label="Referral programme coming soon"
-                className="inline-flex items-center gap-2 bg-muted text-muted-foreground font-semibold px-5 py-3 rounded-full text-sm cursor-not-allowed"
-              >
-                <Clock className="w-4 h-4" />
-                Coming soon
-              </span>
+              <ReferAFriendDialog>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-5 py-3 rounded-full text-sm transition-colors"
+                >
+                  Refer a friend <ArrowRight className="w-4 h-4" />
+                </button>
+              </ReferAFriendDialog>
             </div>
 
             <div aria-hidden className="hidden md:flex flex-col items-center justify-between py-4 relative">

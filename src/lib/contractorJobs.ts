@@ -9,6 +9,7 @@ export const JOB_STATUS_OPTIONS = [
   "Client received quotation",
   "Quote accepted",
   "Invoiced",
+  "Paid",
 ] as const;
 
 export type JobStatus = (typeof JOB_STATUS_OPTIONS)[number];
@@ -200,7 +201,7 @@ export async function createContractorJob(
   }
 }
 
-async function uploadJobDocuments(
+export async function uploadJobDocuments(
   userId: string,
   jobId: string,
   files: File[],
@@ -237,6 +238,21 @@ async function uploadJobDocuments(
   }
 
   return uploaded;
+}
+
+export async function addJobInvoices(
+  userId: string,
+  jobId: string,
+  existingCount: number,
+  files: File[],
+): Promise<ContractorDocument[]> {
+  if (existingCount + files.length > MAX_INVOICES_PER_JOB) {
+    throw new Error(`Maximum ${MAX_INVOICES_PER_JOB} files per job.`);
+  }
+  const invoiceError = validateInvoiceFiles(files);
+  if (invoiceError) throw new Error(invoiceError);
+
+  return uploadJobDocuments(userId, jobId, files);
 }
 
 export async function updateContractorJobStatus(

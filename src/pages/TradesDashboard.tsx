@@ -6,6 +6,7 @@ import { JobAddForm } from "@/components/trades/JobAddForm";
 import { TradesSettingsPanel } from "@/components/trades/TradesSettingsPanel";
 import {
   JOB_STATUS_OPTIONS,
+  MAX_INVOICES_PER_JOB,
   formatJobForUi,
   validateInvoiceFiles,
   type JobFormValues,
@@ -51,6 +52,7 @@ const STATUS_STYLE: Record<Status, string> = {
   "Client received quotation": "bg-violet-50 text-violet-700 border-violet-200",
   "Quote accepted": "bg-emerald-50 text-emerald-700 border-emerald-200",
   "Invoiced": "bg-accent/10 text-accent border-accent/30",
+  "Paid": "bg-green-50 text-green-700 border-green-200",
 };
 
 const STATUS_DOT: Record<Status, string> = {
@@ -59,6 +61,7 @@ const STATUS_DOT: Record<Status, string> = {
   "Client received quotation": "bg-violet-500",
   "Quote accepted": "bg-emerald-500",
   "Invoiced": "bg-accent",
+  "Paid": "bg-green-500",
 };
 
 type Tab = "overview" | "jobs" | "documents" | "settings";
@@ -85,6 +88,7 @@ export default function TradesDashboard() {
     removeJob,
     uploadDocuments,
     removeDocument,
+    addInvoicesToJob,
   } = useContractorJobs(profile?.user_id, isApproved);
 
   const jobs = useMemo(() => rawJobs.map(formatJobForUi), [rawJobs]);
@@ -119,7 +123,7 @@ export default function TradesDashboard() {
 
   const stats = useMemo(() => {
     const total = jobs.length;
-    const active = jobs.filter((j) => j.status !== "Invoiced").length;
+    const active = jobs.filter((j) => j.status !== "Invoiced" && j.status !== "Paid").length;
     const accepted = jobs.filter((j) => j.status === "Quote accepted").length;
     const invoiced = jobs.filter((j) => j.status === "Invoiced").length;
     return { total, active, accepted, invoiced };
@@ -204,6 +208,22 @@ export default function TradesDashboard() {
       toast({
         title: "Files uploaded",
         description: `${files.length} file${files.length > 1 ? "s" : ""} saved.`,
+      });
+    } catch (err) {
+      toast({
+        title: "Upload failed",
+        description: getSupabaseErrorMessage(err),
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleAddInvoice = async (jobId: string, files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    try {
+      await addInvoicesToJob(jobId, Array.from(files));
+      toast({
+        title: "Invoice added successfully",
       });
     } catch (err) {
       toast({
@@ -740,10 +760,8 @@ export default function TradesDashboard() {
                             <p className="line-clamp-2">{j.comments || "—"}</p>
                           </td>
                           <td className="py-4 px-4">
-                            {(jobDocsByJobId.get(j.id)?.length ?? 0) === 0 ? (
-                              <span className="text-xs text-ink-400">—</span>
-                            ) : (
-                              <ul className="space-y-1">
+                            {(jobDocsByJobId.get(j.id)?.length ?? 0) > 0 && (
+                              <ul className="space-y-1 mb-1.5">
                                 {jobDocsByJobId.get(j.id)!.map((doc) => (
                                   <li key={doc.id}>
                                     <button
@@ -758,6 +776,22 @@ export default function TradesDashboard() {
                                   </li>
                                 ))}
                               </ul>
+                            )}
+                            {(jobDocsByJobId.get(j.id)?.length ?? 0) < MAX_INVOICES_PER_JOB && (
+                              <label className="inline-flex items-center gap-1 text-xs font-medium text-ink-500 hover:text-accent cursor-pointer">
+                                <Plus className="w-3 h-3 shrink-0" />
+                                Add invoice
+                                <input
+                                  type="file"
+                                  multiple
+                                  className="hidden"
+                                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
+                                  onChange={(e) => {
+                                    handleAddInvoice(j.id, e.target.files);
+                                    e.target.value = "";
+                                  }}
+                                />
+                              </label>
                             )}
                           </td>
                           <td className="py-4 px-4">

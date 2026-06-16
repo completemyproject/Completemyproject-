@@ -292,8 +292,8 @@ export default function GetQuotes() {
                     )}
                   />
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     variant="hero" 
                     size="lg" 
                     className="w-full text-base text-white font-semibold py-6"

@@ -236,6 +236,7 @@ export type Database = {
           description: string
           email: string
           id: string
+          marketing_opt_in: boolean
           name: string
           phone: string
           postcode: string
@@ -248,6 +249,7 @@ export type Database = {
           description: string
           email: string
           id?: string
+          marketing_opt_in?: boolean
           name: string
           phone: string
           postcode: string
@@ -260,6 +262,7 @@ export type Database = {
           description?: string
           email?: string
           id?: string
+          marketing_opt_in?: boolean
           name?: string
           phone?: string
           postcode?: string
@@ -317,6 +320,39 @@ export type Database = {
           },
         ]
       }
+      referrals: {
+        Row: {
+          client_email: string
+          client_name: string
+          client_phone: string
+          created_at: string
+          id: string
+          referrer_email: string
+          referrer_name: string
+          status: string
+        }
+        Insert: {
+          client_email: string
+          client_name: string
+          client_phone: string
+          created_at?: string
+          id?: string
+          referrer_email: string
+          referrer_name: string
+          status?: string
+        }
+        Update: {
+          client_email?: string
+          client_name?: string
+          client_phone?: string
+          created_at?: string
+          id?: string
+          referrer_email?: string
+          referrer_name?: string
+          status?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -358,6 +394,7 @@ export type Database = {
           p_postcode: string
           p_project_type: string
           p_description: string
+          p_marketing_opt_in?: boolean
         }
         Returns: string
       }
