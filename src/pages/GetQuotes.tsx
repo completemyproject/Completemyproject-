@@ -36,6 +36,7 @@ const projectTypes = [...QUOTE_PROJECT_TYPES];
 export default function GetQuotes() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   const [searchParams] = useSearchParams();
 
   const form = useForm<FormValues>({
@@ -281,7 +282,7 @@ export default function GetQuotes() {
                         </FormControl>
                         <div className="space-y-1 leading-none">
                           <FormLabel className="text-sm font-normal text-muted-foreground cursor-pointer">
-                            Completemyproject.co.uk is here to help you find and connect with muti-trade companies. We take great care in vetting the professionals we introduce, but the work is completed by the muti-trade companies themselves, who are responsible for their own services.{" "}
+                            <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">Completemyproject.co.uk</a> is here to help you find and connect with muti-trade companies. We take great care in vetting the professionals we introduce, but the work is completed by the muti-trade companies themselves, who are responsible for their own services.{" "}
                             <Link to="/terms" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">
                               Read full Terms & Conditions
                             </Link>
@@ -292,10 +293,23 @@ export default function GetQuotes() {
                     )}
                   />
 
+                  <label className="flex items-start gap-2.5 cursor-pointer">
+                    <Checkbox
+                      checked={marketingOptIn}
+                      onCheckedChange={(checked) => setMarketingOptIn(checked === true)}
+                      className="mt-0.5 shrink-0"
+                    />
+                    <span className="text-xs font-normal text-muted-foreground leading-relaxed">
+                      By ticking this box, you agree to receive marketing communications from{" "}
+                      <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">completemyproject.co.uk</a>
+                      {" "}and selected third-party partners. Your data may be shared with these partners.
+                    </span>
+                  </label>
+
                   <Button
                     type="submit"
-                    variant="hero" 
-                    size="lg" 
+                    variant="hero"
+                    size="lg"
                     className="w-full text-base text-white font-semibold py-6"
                     disabled={isSubmitting}
                   >

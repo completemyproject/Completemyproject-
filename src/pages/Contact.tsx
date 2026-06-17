@@ -30,7 +30,7 @@ export default function Contact() {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "General enquiry", message: "", agreeToPrivacy: false });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "General enquiry", message: "", agreeToPrivacy: false, marketingOptIn: false });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,7 +77,7 @@ export default function Contact() {
     }
 
     toast({ title: "Message sent", description: "We'll get back to you within one working day." });
-    setForm({ name: "", email: "", phone: "", topic: "General enquiry", message: "", agreeToPrivacy: false });
+    setForm({ name: "", email: "", phone: "", topic: "General enquiry", message: "", agreeToPrivacy: false, marketingOptIn: false });
   };
 
   return (
@@ -225,6 +225,21 @@ export default function Contact() {
                     </span>
                   </label>
                   {errors.agreeToPrivacy && <span className="block mt-1.5 text-xs text-destructive">{errors.agreeToPrivacy}</span>}
+                </div>
+
+                <div className="mb-6">
+                  <label className="flex items-start gap-2.5 cursor-pointer">
+                    <Checkbox
+                      checked={form.marketingOptIn}
+                      onCheckedChange={(checked) => setForm({ ...form, marketingOptIn: checked === true })}
+                      className="mt-0.5"
+                    />
+                    <span className="text-xs text-muted-foreground leading-relaxed">
+                      By ticking this box, you agree to receive marketing communications from{" "}
+                      <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">completemyproject.co.uk</a>
+                      {" "}and selected third-party partners. Your data may be shared with these partners.
+                    </span>
+                  </label>
                 </div>
 
                 <button
