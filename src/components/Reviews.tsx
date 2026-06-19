@@ -2,10 +2,10 @@ import { Star, Quote } from "lucide-react";
 import reviewsHeroImg from "@/assets/reviews-hero.jpg";
 
 const reviews = [
-  { name: "Mr Smith", location: "London", rating: 5, text: "Absolutely fantastic service from start to finish. The company that was matched to us handled our full kitchen and bathroom renovation seamlessly. Couldn't recommend enough!" },
-  { name: "Mrs Rod", location: "Manchester", rating: 5, text: "We were dreading managing multiple trades for our extension. One company did it all — plumbing, electrics, plastering, the lot. Stress-free experience." },
-  { name: "Mr Patel", location: "Birmingham", rating: 5, text: "The vetting process gave us real confidence. The team arrived on time, kept the site clean, and delivered exactly what was promised. Outstanding." },
-  { name: "Mrs Johnson", location: "Leeds", rating: 4, text: "Great experience overall. Our loft conversion was completed on budget and ahead of schedule. The project manager kept us informed throughout." },
+  { name: "Mr Cross", location: "Leeds", rating: 5, text: "Absolutely fantastic service from start to finish. The company that was matched to us handled our full kitchen and bathroom renovation seamlessly. Couldn't recommend enough!" },
+  { name: "Mrs Rod", location: "Batley", rating: 5, text: "We were dreading managing multiple trades for our extension. One company did it all — plumbing, electrics, plastering, the lot. Stress-free experience." },
+  { name: "Mr Patel", location: "Huddersfield", rating: 5, text: "The vetting process gave us real confidence. The team arrived on time, kept the site clean, and delivered exactly what was promised. Outstanding." },
+  { name: "Mrs Johnson", location: "Dewsbury", rating: 4, text: "Great experience overall. Our loft conversion was completed on budget and ahead of schedule. The project manager kept us informed throughout." },
   { name: "Mr Davies", location: "Bristol", rating: 5, text: "From the initial quote to the final walkthrough, everything was professional. Our new flooring and interior renovation look incredible." },
   { name: "Mrs O'Brien", location: "Liverpool", rating: 5, text: "I was nervous about getting solar panels fitted, but the matched company explained everything clearly and the installation was flawless." },
   { name: "Mr Thompson", location: "Edinburgh", rating: 5, text: "Brilliant service. They handled our landscaping and driveway project with real care. The garden has been completely transformed." },

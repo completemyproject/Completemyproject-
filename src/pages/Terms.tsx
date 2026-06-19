@@ -100,10 +100,17 @@ const Terms = () => {
             <section>
               <h2 className="font-display text-xl font-bold text-foreground mb-3">9. Referral Fees</h2>
               <p className="mb-3">
-                Referral fees are only payable once completemyproject.co.uk has received payment from the introducer's customer. Fees may vary depending on the size of the job.
+                Referral fees are only payable once <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a> has received payment from the introducer's customer. Fees may vary depending on the size of the job.
+              </p>
+              <p className="mb-3">
+                Before any payment is made by <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a> to an introducer, an invoice is required. Payment will be made within 3 days of receiving a valid invoice.
+              </p>
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">Refer a Friend Referral Scheme</h3>
+              <p className="mb-3">
+                If a referral results in a project with a value of less than £25,000, the referral fee payable will be £150. For any project with a value of £25,000 or more, the introducer will receive a referral fee of £250. For projects with a total value of less than £8,000, <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">Completemyproject.co.uk</a> may agree a reduced referral fee with the introducer at its discretion.
               </p>
               <p>
-                Before any payment is made by completemyproject.co.uk to an introducer, an invoice is required. Payment will be made within 3 days of receiving a valid invoice.
+                Referral fees are payable only once <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">Completemyproject.co.uk</a> has received full payment for the project. Payment of the referral fee is also subject to the introducer providing a valid invoice.
               </p>
             </section>
           </div>

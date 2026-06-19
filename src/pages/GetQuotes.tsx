@@ -328,7 +328,7 @@ export default function GetQuotes() {
                     {[
                       { icon: Shield, title: "Gold Standard Vetting", desc: "Every firm passes our 6-point check including DBS & references." },
                       { icon: Users, title: "Up to 3 Quotes", desc: "Compare competitive offers side by side — no obligation." },
-                      { icon: Clock, title: "Quotes Within 24hrs", desc: "Fast turnaround so your project gets started sooner." },
+                      { icon: Clock, title: "Contact Within 48 Hours", desc: "Fast turnaround so your project gets started sooner." },
                       { icon: CheckCircle, title: "100% Free", desc: "No fees, no hidden costs, no account required to start." },
                     ].map((item) => (
                       <div key={item.title} className="flex gap-4">

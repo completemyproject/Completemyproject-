@@ -1,15 +1,5 @@
 import { AFFILIATES } from "@/data/affiliates";
 
-const COMING_SOON_COUNT = 6;
-const comingSoonSlots = Array.from({ length: COMING_SOON_COUNT }, (_, i) => ({
-  type: "placeholder" as const,
-  key: `cs-${i}`,
-}));
-
-const affiliateSlots = AFFILIATES.map((a) => ({ type: "affiliate" as const, key: a.name, ...a }));
-const ALL_ITEMS = [...affiliateSlots, ...comingSoonSlots];
-const loop = [...ALL_ITEMS, ...ALL_ITEMS];
-
 export default function AffiliatedNetworkStrip() {
   return (
     <section aria-labelledby="partners-heading" className="py-10 sm:py-16 bg-warm-100 border-y border-warm-200">
@@ -24,37 +14,28 @@ export default function AffiliatedNetworkStrip() {
           </h2>
         </div>
 
-        <div className="marquee-pause relative overflow-hidden py-2 sm:py-3">
-          <div aria-hidden className="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-r from-warm-100 to-transparent z-10" />
-          <div aria-hidden className="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-l from-warm-100 to-transparent z-10" />
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
+          {AFFILIATES.map((affiliate) => (
+            <a
+              key={affiliate.name}
+              href={affiliate.url}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              title={affiliate.name}
+              className="flex items-center justify-center shrink-0 h-14 w-28 sm:h-20 sm:w-40 lg:h-24 lg:w-48 rounded-xl border border-warm-200 bg-white p-3"
+            >
+              <img
+                src={affiliate.logo}
+                alt={affiliate.name}
+                className="max-h-full max-w-full object-contain"
+              />
+            </a>
+          ))}
 
-          <div className="marquee-track flex flex-nowrap items-center gap-8 sm:gap-20 w-max">
-            {loop.map((item, i) => (
-              <div
-                key={`${item.key}-${i}`}
-                className="flex items-center justify-center shrink-0 h-14 w-28 sm:h-20 sm:w-40 lg:h-24 lg:w-48 rounded-xl border border-warm-200 bg-white"
-              >
-                {item.type === "affiliate" ? (
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center justify-center w-full h-full p-3"
-                    title={item.name}
-                  >
-                    <img
-                      src={item.logo}
-                      alt={item.name}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </a>
-                ) : (
-                  <span className="text-sm sm:text-base font-semibold text-oak-600 tracking-tight">
-                    Coming Soon
-                  </span>
-                )}
-              </div>
-            ))}
+          <div className="flex items-center justify-center shrink-0 h-14 w-28 sm:h-20 sm:w-40 lg:h-24 lg:w-48 rounded-xl border border-dashed border-warm-200 bg-white/50">
+            <span className="text-sm sm:text-base font-semibold text-oak-600 tracking-tight text-center px-2">
+              More Coming Soon
+            </span>
           </div>
         </div>
       </div>

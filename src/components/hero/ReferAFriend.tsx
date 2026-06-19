@@ -4,7 +4,7 @@ import ReferAFriendDialog from "./ReferAFriendDialog";
 const REFERRAL_STEPS = [
   "Share your unique referral link with a friend",
   "They submit a project and get matched",
-  "You receive £250 once the project is confirmed",
+  "You receive £150–£250 once the project is confirmed",
 ];
 
 export default function ReferAFriend() {
@@ -14,7 +14,7 @@ export default function ReferAFriend() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-oak-600 mb-3">Rewards programme</p>
           <h2 id="refer-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
-            Refer a friend & earn £250
+            Earn £150–£250 for successful referrals
           </h2>
         </div>
 
@@ -27,10 +27,10 @@ export default function ReferAFriend() {
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-foreground mb-3 leading-tight tracking-tight">
                 Refer a Friend &<br />
-                <span className="text-oak-600">Receive £250</span>
+                <span className="text-oak-600">Receive £150–£250</span>
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                Know someone planning a renovation? Refer them to completemyproject. When their project is confirmed and the customer pays, you'll receive <strong className="text-foreground">£250 cash back</strong> as a thank you.
+                Know someone planning a renovation? Refer them to completemyproject. When their project is confirmed and the customer pays, you'll receive <strong className="text-foreground">£150–£250 cash back</strong> as a thank you.
               </p>
               <ol className="space-y-2.5 mb-6">
                 {REFERRAL_STEPS.map((step, i) => (
@@ -60,8 +60,8 @@ export default function ReferAFriend() {
 
             <div className="bg-gradient-to-br from-warm-100 to-warm-200 flex items-center justify-center p-6">
               <div className="w-32 h-32 rounded-full bg-gradient-oak shadow-lifted flex flex-col items-center justify-center text-center text-warm-50 ring-4 ring-warm-50/40">
-                <span className="font-display text-4xl font-extrabold leading-none">£250</span>
-                <p className="text-[10px] font-semibold uppercase tracking-wider mt-1 opacity-90">per referral</p>
+                <span className="font-display text-xl sm:text-2xl font-extrabold leading-none whitespace-nowrap">£150–£250</span>
+                <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider mt-1 opacity-90">per referral</p>
               </div>
             </div>
           </div>
