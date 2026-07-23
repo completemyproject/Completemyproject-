@@ -113,6 +113,14 @@ const REFERRAL_STATUS_OPTIONS = ["pending", "accepted", "rejected"] as const;
 
 const REFERRAL_STATUS_STYLE: Record<string, string> = PARTNERSHIP_STATUS_STYLE;
 
+const CONTACT_STATUS_OPTIONS = ["new", "contacted", "resolved"] as const;
+
+const CONTACT_STATUS_STYLE: Record<string, string> = {
+  new: "bg-blue-50 text-blue-700 border-blue-200",
+  contacted: "bg-amber-50 text-amber-700 border-amber-200",
+  resolved: "bg-emerald-50 text-emerald-700 border-emerald-200",
+};
+
 const ENQUIRY_STATUS_OPTIONS = [
   "new",
   "contacted",
@@ -157,9 +165,10 @@ export default function Admin() {
   const [selectedPartnership, setSelectedPartnership] = useState<ContactMessage | null>(null);
   const [referrals, setReferrals] = useState<Referral[]>([]);
   const [selectedReferral, setSelectedReferral] = useState<Referral | null>(null);
-  const [referralStatusFilter, setReferralStatusFilter] = useState<string>("all");
-  const [enquiryStatusFilter, setEnquiryStatusFilter] = useState<string>("all");
+  const [referralStatusFilter, setReferralStatusFilter] = useState<string>("pending");
+  const [enquiryStatusFilter, setEnquiryStatusFilter] = useState<string>("new");
   const [contactTopicFilter, setContactTopicFilter] = useState<string>("all");
+  const [contactStatusFilter, setContactStatusFilter] = useState<string>("new");
 
   const [loading, setLoading] = useState(true);
   const [loadingApplications, setLoadingApplications] = useState(true);
@@ -176,7 +185,7 @@ export default function Admin() {
     [contactMessages],
   );
 
-  const [partnershipStatusFilter, setPartnershipStatusFilter] = useState<string>("all");
+  const [partnershipStatusFilter, setPartnershipStatusFilter] = useState<string>("pending");
   const [partnershipTypeFilter, setPartnershipTypeFilter] = useState<string>("all");
 
   const partnershipCounts = useMemo(
@@ -312,10 +321,23 @@ export default function Admin() {
     return Array.from(topics).sort();
   }, [generalContactMessages]);
 
+  const contactCounts = useMemo(
+    () => ({
+      all: generalContactMessages.length,
+      new: generalContactMessages.filter((m) => m.status === "new").length,
+      contacted: generalContactMessages.filter((m) => m.status === "contacted").length,
+      resolved: generalContactMessages.filter((m) => m.status === "resolved").length,
+    }),
+    [generalContactMessages],
+  );
+
   const filteredContactMessages = useMemo(() => {
-    if (contactTopicFilter === "all") return generalContactMessages;
-    return generalContactMessages.filter((m) => m.topic === contactTopicFilter);
-  }, [generalContactMessages, contactTopicFilter]);
+    return generalContactMessages.filter((m) => {
+      if (contactTopicFilter !== "all" && m.topic !== contactTopicFilter) return false;
+      if (contactStatusFilter !== "all" && m.status !== contactStatusFilter) return false;
+      return true;
+    });
+  }, [generalContactMessages, contactTopicFilter, contactStatusFilter]);
 
   const [contactPage, setContactPage] = useState(1);
 
@@ -332,7 +354,7 @@ export default function Admin() {
 
   useEffect(() => {
     setContactPage(1);
-  }, [contactTopicFilter]);
+  }, [contactTopicFilter, contactStatusFilter]);
 
   useEffect(() => {
     if (contactPage > contactTotalPages) setContactPage(contactTotalPages);
@@ -393,6 +415,16 @@ export default function Admin() {
     requestConfirm({
       title: "Change application status?",
       description: `Mark ${message.name}'s partnership application as "${formatStatusLabel(newStatus)}"?`,
+      confirmLabel: "Update status",
+      onConfirm: () => updatePartnershipStatus(message, newStatus),
+    });
+  };
+
+  const requestContactStatusChange = (message: ContactMessage, newStatus: string) => {
+    if (newStatus === message.status) return;
+    requestConfirm({
+      title: "Change message status?",
+      description: `Mark ${message.name}'s message as "${formatStatusLabel(newStatus)}"?`,
       confirmLabel: "Update status",
       onConfirm: () => updatePartnershipStatus(message, newStatus),
     });
@@ -595,20 +627,32 @@ export default function Admin() {
       pendingApps: applications.filter((a) => a.status === "pending").length,
       tradespersonJobs: contractorJobs.length,
       partnerships: partnershipMessages.length,
+      newPartnerships: partnershipCounts.pending,
       contactMessages: generalContactMessages.length,
+      newContactMessages: contactCounts.new,
       referrals: referrals.length,
       pendingReferrals: referralCounts.pending,
     }),
-    [enquiries, applications, contractorJobs, partnershipMessages, generalContactMessages, referrals, referralCounts],
+    [
+      enquiries,
+      applications,
+      contractorJobs,
+      partnershipMessages,
+      partnershipCounts,
+      generalContactMessages,
+      contactCounts,
+      referrals,
+      referralCounts,
+    ],
   );
 
   const navBadgeCounts = useMemo(
     () => ({
       applications: stats.pendingApps,
-      quotes: stats.totalEnquiries,
-      partnerships: stats.partnerships,
+      quotes: stats.newLeads,
+      partnerships: stats.newPartnerships,
       referrals: stats.pendingReferrals,
-      contact: stats.contactMessages,
+      contact: stats.newContactMessages,
     }),
     [stats],
   );
@@ -923,19 +967,20 @@ export default function Admin() {
                 <>
                   <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 mb-6 sm:mb-8">
                     {[
-                      { label: "Get quotes", value: stats.totalEnquiries, icon: FileCheck, tint: "bg-blue-50 text-blue-700" },
-                      { label: "New leads", value: stats.newLeads, icon: Users, tint: "bg-violet-50 text-violet-700" },
-                      { label: "Partnerships", value: stats.partnerships, icon: Handshake, tint: "bg-emerald-50 text-emerald-700" },
-                      { label: "Referrals", value: stats.referrals, icon: Gift, tint: "bg-pink-50 text-pink-700" },
-                      { label: "Contact us", value: stats.contactMessages, icon: MessageSquare, tint: "bg-amber-50 text-amber-700" },
-                      { label: "Pending apps", value: stats.pendingApps, icon: UserPlus, tint: "bg-warm-100 text-ink-700" },
-                      { label: "Trades jobs", value: stats.tradespersonJobs, icon: Briefcase, tint: "bg-accent/10 text-accent" },
+                      { label: "Get quotes", value: stats.newLeads, icon: FileCheck, tint: "bg-blue-50 text-blue-700", tab: "quotes" as AdminTab },
+                      { label: "New leads", value: stats.newLeads, icon: Users, tint: "bg-violet-50 text-violet-700", tab: "quotes" as AdminTab },
+                      { label: "Partnerships", value: stats.newPartnerships, icon: Handshake, tint: "bg-emerald-50 text-emerald-700", tab: "partnerships" as AdminTab },
+                      { label: "Referrals", value: stats.pendingReferrals, icon: Gift, tint: "bg-pink-50 text-pink-700", tab: "referrals" as AdminTab },
+                      { label: "Contact us", value: stats.newContactMessages, icon: MessageSquare, tint: "bg-amber-50 text-amber-700", tab: "contact" as AdminTab },
+                      { label: "Trades jobs", value: stats.tradespersonJobs, icon: Briefcase, tint: "bg-accent/10 text-accent", tab: "jobs" as AdminTab },
                     ].map((s) => {
                       const Icon = s.icon;
                       return (
-                        <div
+                        <button
+                          type="button"
                           key={s.label}
-                          className="bg-white rounded-2xl border border-warm-200 shadow-sm p-4 sm:p-5 min-w-0"
+                          onClick={() => setTab(s.tab)}
+                          className="text-left bg-white rounded-2xl border border-warm-200 shadow-sm p-4 sm:p-5 min-w-0 transition hover:border-accent/40 hover:shadow-md cursor-pointer"
                         >
                           <div className="flex items-start justify-between gap-2 mb-2 sm:mb-3">
                             <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shrink-0 ${s.tint}`}>
@@ -952,7 +997,7 @@ export default function Admin() {
                           <p className="text-[10px] sm:text-xs font-semibold text-ink-500 mt-1.5 sm:mt-2 uppercase tracking-wider leading-tight">
                             {s.label}
                           </p>
-                        </div>
+                        </button>
                       );
                     })}
                   </section>
@@ -1885,8 +1930,25 @@ export default function Admin() {
                         Submissions from /contact — Send us a message form
                       </p>
                     </div>
-                    {contactTopics.length > 0 && (
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <div className="flex gap-1 rounded-lg bg-warm-100 p-1 w-full sm:w-auto sm:max-w-md">
+                        {(["all", ...CONTACT_STATUS_OPTIONS] as const).map((status) => (
+                          <button
+                            key={status}
+                            type="button"
+                            onClick={() => setContactStatusFilter(status)}
+                            className={`flex-1 rounded-md px-2 py-1.5 text-xs font-semibold transition whitespace-nowrap ${
+                              contactStatusFilter === status
+                                ? "bg-white text-ink-900 shadow-sm"
+                                : "text-ink-500 hover:text-ink-900"
+                            }`}
+                          >
+                            {status === "all" ? "All" : formatStatusLabel(status)}{" "}
+                            <span className="text-ink-400">({contactCounts[status]})</span>
+                          </button>
+                        ))}
+                      </div>
+                      {contactTopics.length > 0 && (
                         <Select value={contactTopicFilter} onValueChange={setContactTopicFilter}>
                           <SelectTrigger className="w-full sm:w-48 h-9 border-warm-200 text-sm">
                             <SelectValue placeholder="All topics" />
@@ -1900,8 +1962,8 @@ export default function Admin() {
                             ))}
                           </SelectContent>
                         </Select>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                   {generalContactMessages.length === 0 ? (
                     <p className="text-sm text-ink-500 p-4 sm:p-6">
@@ -1912,7 +1974,10 @@ export default function Admin() {
                       No messages match your filters.{" "}
                       <button
                         type="button"
-                        onClick={() => setContactTopicFilter("all")}
+                        onClick={() => {
+                          setContactTopicFilter("all");
+                          setContactStatusFilter("all");
+                        }}
                         className="text-accent font-semibold hover:underline"
                       >
                         Clear filters
@@ -1933,10 +1998,13 @@ export default function Admin() {
                                 <p className="font-semibold text-ink-900 truncate">{m.name}</p>
                                 <p className="text-xs text-ink-500 truncate">{m.email}</p>
                               </div>
-                              <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border bg-warm-100 text-ink-600 border-warm-200">
-                                {m.topic || "—"}
+                              <span
+                                className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border ${CONTACT_STATUS_STYLE[m.status] || "bg-warm-100 text-ink-600 border-warm-200"}`}
+                              >
+                                {formatStatusLabel(m.status)}
                               </span>
                             </div>
+                            <p className="text-xs text-ink-500">{m.topic || "—"}</p>
                             <p className="text-xs text-ink-500">
                               {new Date(m.created_at).toLocaleDateString("en-GB")}
                             </p>
@@ -1944,11 +2012,12 @@ export default function Admin() {
                         ))}
                       </div>
                       <div className="hidden md:block overflow-x-auto">
-                        <table className="w-full text-sm min-w-[640px]">
+                        <table className="w-full text-sm min-w-[720px]">
                           <thead className="bg-warm-100/50">
                             <tr className="text-left text-[11px] uppercase tracking-wider text-ink-500">
                               <th className="py-3 px-4 lg:px-6 font-semibold">Sender</th>
                               <th className="py-3 px-4 font-semibold">Topic</th>
+                              <th className="py-3 px-4 font-semibold">Status</th>
                               <th className="py-3 px-4 font-semibold">Submitted</th>
                               <th className="py-3 px-4 font-semibold" />
                             </tr>
@@ -1961,6 +2030,25 @@ export default function Admin() {
                                   <p className="text-xs text-ink-500 truncate max-w-[200px]">{m.email}</p>
                                 </td>
                                 <td className="py-4 px-4 text-ink-700">{m.topic || "—"}</td>
+                                <td className="py-4 px-4">
+                                  <Select
+                                    value={m.status}
+                                    onValueChange={(v) => requestContactStatusChange(m, v)}
+                                  >
+                                    <SelectTrigger
+                                      className={`h-8 w-36 text-xs font-semibold rounded-full border ${CONTACT_STATUS_STYLE[m.status] || "bg-warm-100 text-ink-600 border-warm-200"}`}
+                                    >
+                                      <SelectValue>{formatStatusLabel(m.status)}</SelectValue>
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {CONTACT_STATUS_OPTIONS.map((s) => (
+                                        <SelectItem key={s} value={s}>
+                                          {formatStatusLabel(s)}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+                                </td>
                                 <td className="py-4 px-4 text-ink-500 whitespace-nowrap">
                                   {new Date(m.created_at).toLocaleDateString("en-GB")}
                                 </td>
@@ -2256,6 +2344,26 @@ export default function Admin() {
                     Topic
                   </span>
                   <p className="font-medium text-ink-900 mt-1">{selectedMessage.topic || "—"}</p>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-ink-500 uppercase tracking-wider mb-1.5 block">
+                    Status
+                  </span>
+                  <Select
+                    value={selectedMessage.status}
+                    onValueChange={(v) => requestContactStatusChange(selectedMessage, v)}
+                  >
+                    <SelectTrigger className="w-full sm:w-48 h-10 border-warm-200">
+                      <SelectValue>{formatStatusLabel(selectedMessage.status)}</SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CONTACT_STATUS_OPTIONS.map((s) => (
+                        <SelectItem key={s} value={s}>
+                          {formatStatusLabel(s)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div>
                   <span className="text-xs font-semibold text-ink-500 uppercase tracking-wider">
