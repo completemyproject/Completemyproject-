@@ -98,9 +98,6 @@ const Privacy = () => {
               </p>
               <p><strong>Email:</strong> info@completemyproject.co.uk</p>
               <p><strong>Address:</strong> 4 Railway Street, Huddersfield, HD1 1JP.</p>
-              <p className="mt-3">
-                Individuals may also complain to the Information Commissioner’s Office (ICO) by post at Wycliffe House, Water Lane, Wilmslow, Cheshire SK9 5AF, or via their website: <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener noreferrer">https://ico.org.uk/make-a-complaint/</a>.
-              </p>
             </section>
           </div>
         </div>

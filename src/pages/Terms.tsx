@@ -113,6 +113,25 @@ const Terms = () => {
                 Referral fees are payable only once <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">Completemyproject.co.uk</a> has received full payment for the project. Payment of the referral fee is also subject to the introducer providing a valid invoice.
               </p>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">10. Social Media Advertising and Promotional Content Disclaimer</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">10.1 For Illustrative Purposes Only</h3>
+              <p className="mb-3">
+                All marketing materials, promotional videos, case studies, project imagery, and advertisements published by the Company (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>) on social media platforms (including but not limited to Meta, Facebook, Instagram, TikTok, LinkedIn, and YouTube) are provided strictly for general illustrative and informational purposes.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">10.2 No Contractual Reliance or Warranties</h3>
+              <p className="mb-3">
+                Social media advertisements do not constitute a formal legal offer, a guarantee of project outcomes, a fixed pricing quote, or a binding contractual term. Because every multi-trade project varies significantly based on structural specs, location, and materials, the Customer acknowledges that they cannot legally rely on social media content as a representation of their specific project. The Company gives no warranties, express or implied, regarding the exact replication of any project shown online.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">10.3 Exclusion of Liability for Third-Party Content &amp; Interpretation</h3>
+              <p>
+                The Company completely excludes any liability for financial loss, distress, or damages arising from a Customer's interpretation or misinterpretation of social media advertising copy or graphics. Furthermore, where project imagery or testimonials feature independent multi-trade contractors onboarded to our network, those materials represent the past work of that specific contractor only, and the Company is not liable for any discrepancies between advertised media and real-world project execution.
+              </p>
+            </section>
           </div>
         </div>
       </main>

@@ -22,7 +22,7 @@ export default function AffiliatedNetworkStrip() {
               target="_blank"
               rel="noopener noreferrer sponsored"
               title={affiliate.name}
-              className="flex items-center justify-center shrink-0 h-14 w-24 sm:h-16 sm:w-32 lg:h-24 lg:w-[200px] rounded-xl border border-warm-200 bg-white p-2.5"
+              className="flex items-center justify-center shrink-0 h-20 w-36 sm:h-16 sm:w-32 lg:h-24 lg:w-[200px] rounded-xl border border-warm-200 bg-white p-2.5"
             >
               <img
                 src={affiliate.logo}
