@@ -1,5 +1,6 @@
 import simplyLidLogo from "@/assets/Affiliates/simply-lid.png";
 import travisLogo from "@/assets/Affiliates/travis.png";
+import theRangeLogo from "@/assets/Affiliates/the-range.png";
 import buyShedsDirectLogo from "@/assets/Affiliates/buy-sheds-direct.jpg";
 import rustOleumLogo from "@/assets/Affiliates/rust-oleum.jpg";
 import aspireStoreLogo from "@/assets/Affiliates/aspire-store.jpg";
@@ -12,19 +13,24 @@ export interface Affiliate {
 
 export const AFFILIATES: Affiliate[] = [
   {
-    name: "Simply Lids",
-    logo: simplyLidLogo,
-    url: "https://tidd.ly/4eOJC0X",
-  },
-  {
     name: "Travis Perkins",
     logo: travisLogo,
     url: "https://tidd.ly/3SePw3C",
   },
   {
+    name: "The Range",
+    logo: theRangeLogo,
+    url: "https://tidd.ly/4h83rTy",
+  },
+  {
     name: "Buy Sheds Direct",
     logo: buyShedsDirectLogo,
     url: "https://tidd.ly/4xOCyK8",
+  },
+  {
+    name: "Simply Lids",
+    logo: simplyLidLogo,
+    url: "https://tidd.ly/4eOJC0X",
   },
   {
     name: "Rust-Oleum",

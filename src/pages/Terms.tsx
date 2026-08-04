@@ -132,6 +132,20 @@ const Terms = () => {
                 The Company completely excludes any liability for financial loss, distress, or damages arising from a Customer's interpretation or misinterpretation of social media advertising copy or graphics. Furthermore, where project imagery or testimonials feature independent multi-trade contractors onboarded to our network, those materials represent the past work of that specific contractor only, and the Company is not liable for any discrepancies between advertised media and real-world project execution.
               </p>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">11. No Guarantee of Immediate Work or Job Availability</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">11.1 Platform Nature &amp; Job Availability</h3>
+              <p className="mb-3">
+                The Tradesperson acknowledges and agrees that the Company (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>) operates as a project matching network and does not guarantee the immediate provision, allocation, or continuous supply of work, leads, or projects upon registration. Promotional materials, flyers, or advertisements placed at trade/wholesale counters indicating active or available projects represent general market demand at the time of publication and do not constitute a binding guarantee, legal offer, or reservation of specific jobs for any individual applicant.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">11.2 Independent Application &amp; Background Check Costs</h3>
+              <p>
+                Registration, compliance screening, and third-party verification fees—including but not limited to Basic DBS background checks (£21.50 or any updated statutory fee) paid directly to government authorities or screening bodies—are non-refundable administrative requirements for platform eligibility. The Tradesperson confirms that all such vetting costs are undertaken voluntarily at their own business risk and expense. The Company shall accept zero legal or financial liability, nor shall it be required to reimburse any vetting, background check, or setup costs, in the event that projects are allocated to other verified contractors, jobs become unavailable, or the Tradesperson does not secure work through the platform immediately or at any point thereafter.
+              </p>
+            </section>
           </div>
         </div>
       </main>
