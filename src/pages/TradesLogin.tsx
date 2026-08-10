@@ -299,9 +299,9 @@ export default function TradesLogin() {
                   setTab("signup");
                   resetForgotState();
                 }}
-                className={`py-3.5 text-sm font-semibold tracking-wide transition ${
+                className={`py-3.5 text-sm font-semibold tracking-wide transition border-2 border-accent ${
                   tab === "signup"
-                    ? "bg-warm-50 text-ink-900 border-b-2 border-accent -mb-px"
+                    ? "bg-warm-50 text-ink-900"
                     : "bg-warm-100 text-ink-500 hover:text-ink-900"
                 }`}
               >
