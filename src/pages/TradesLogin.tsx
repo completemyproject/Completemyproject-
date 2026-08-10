@@ -13,6 +13,7 @@ import {
   mapAuthError,
 } from "@/lib/auth";
 import { notifyAccountPendingReview } from "@/lib/emailService";
+import { cn } from "@/lib/utils";
 
 type Tab = "login" | "signup";
 
@@ -29,7 +30,6 @@ export default function TradesLogin() {
   const [forgotSent, setForgotSent] = useState(false);
   const [signup, setSignup] = useState({
     businessName: "",
-    companyNumber: "",
     isLtd: false,
     isSoleTrader: false,
     numberOfDirectors: "",
@@ -39,6 +39,7 @@ export default function TradesLogin() {
     password: "",
     confirmPassword: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     (async () => {
@@ -138,47 +139,59 @@ export default function TradesLogin() {
     setForgotEmail("");
   };
 
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateSignup = () => {
+    const next: Record<string, string> = {};
+    if (!signup.businessName.trim()) next.businessName = "Business name is required.";
+    if (!signup.isLtd && !signup.isSoleTrader) next.businessType = "Select Ltd company or Sole trader.";
+    if (signup.numberOfDirectors.trim()) {
+      const n = Number(signup.numberOfDirectors);
+      if (!Number.isInteger(n) || n < 1) next.numberOfDirectors = "Enter a whole number of 1 or more.";
+    }
+    if (!signup.contactName.trim()) next.contactName = "Contact name is required.";
+    if (signup.contactNumber.trim()) {
+      const digits = signup.contactNumber.replace(/[\s()+-]/g, "");
+      if (!/^(?:44|0)\d{9,10}$/.test(digits)) next.contactNumber = "Enter a valid UK phone number.";
+    }
+    if (!signup.email.trim()) next.email = "Email address is required.";
+    else if (!EMAIL_RE.test(signup.email.trim())) next.email = "Enter a valid email address.";
+    if (!signup.password) next.password = "Password is required.";
+    else if (signup.password.length < 6) next.password = "Use at least 6 characters.";
+    if (!signup.confirmPassword) next.confirmPassword = "Please confirm your password.";
+    else if (signup.password !== signup.confirmPassword) next.confirmPassword = "Passwords don't match.";
+    return next;
+  };
+
+  const setSignupField = (field: keyof typeof signup, value: string | boolean) => {
+    setSignup((s) => ({ ...s, [field]: value }));
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const rest = { ...prev };
+      delete rest[field];
+      return rest;
+    });
+  };
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!signup.businessName || !signup.contactName || !signup.email) {
+    const validationErrors = validateSignup();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       toast({
-        title: "Please complete the required fields",
-        description: "Business name, contact name and email are required.",
+        title: "Please check the form",
+        description: "Some details need fixing before you can submit.",
         variant: "destructive",
       });
       return;
     }
-    if (!signup.isLtd && !signup.isSoleTrader) {
-      toast({
-        title: "Business type required",
-        description: "Select Ltd company or Sole trader.",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (signup.password.length < 6) {
-      toast({
-        title: "Password too short",
-        description: "Use at least 6 characters.",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (signup.password !== signup.confirmPassword) {
-      toast({
-        title: "Passwords don't match",
-        description: "Please confirm your password.",
-        variant: "destructive",
-      });
-      return;
-    }
+    setErrors({});
 
     setLoading(true);
     const { data, error } = await signUpContractor({
       email: signup.email,
       password: signup.password,
       businessName: signup.businessName,
-      companyNumber: signup.companyNumber,
       businessType: signup.isLtd ? "ltd" : "sole_trader",
       numberOfDirectors: signup.numberOfDirectors,
       contactName: signup.contactName,
@@ -221,7 +234,6 @@ export default function TradesLogin() {
     setLogin({ email: signup.email.trim().toLowerCase(), password: "" });
     setSignup({
       businessName: "",
-      companyNumber: "",
       isLtd: false,
       isSoleTrader: false,
       numberOfDirectors: "",
@@ -231,10 +243,13 @@ export default function TradesLogin() {
       password: "",
       confirmPassword: "",
     });
+    setErrors({});
   };
 
   const inputCls =
     "w-full h-11 px-3.5 rounded-xl border border-warm-200 bg-warm-50 text-sm text-ink-900 placeholder:text-ink-500/60 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition";
+  const errInputCls = "border-red-400 focus:ring-red-400/40 focus:border-red-400";
+  const errTextCls = "text-xs text-red-500 mt-1.5";
   const labelCls = "block text-xs font-semibold text-ink-900 mb-1.5 tracking-wide";
 
   if (checkingSession) {
@@ -414,75 +429,68 @@ export default function TradesLogin() {
                 </form>
               ) : (
                 <form onSubmit={handleSignup} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className={labelCls}>Business name *</label>
-                      <input
-                        type="text"
-                        value={signup.businessName}
-                        onChange={(e) => setSignup({ ...signup, businessName: e.target.value })}
-                        className={inputCls}
-                        placeholder="Acme Building Ltd"
-                      />
-                    </div>
-                    <div>
-                      <label className={labelCls}>Company number</label>
-                      <input
-                        type="text"
-                        value={signup.companyNumber}
-                        onChange={(e) => setSignup({ ...signup, companyNumber: e.target.value })}
-                        className={inputCls}
-                        placeholder="12345678"
-                      />
-                    </div>
+                  <div>
+                    <label className={labelCls}>Business name *</label>
+                    <input
+                      type="text"
+                      value={signup.businessName}
+                      onChange={(e) => setSignupField("businessName", e.target.value)}
+                      className={cn(inputCls, errors.businessName && errInputCls)}
+                      placeholder="Acme Building Ltd"
+                    />
+                    {errors.businessName && <p className={errTextCls}>{errors.businessName}</p>}
                   </div>
 
                   <div>
                     <label className={labelCls}>Business type *</label>
                     <div className="grid grid-cols-2 gap-3">
-                      <label className="flex items-center gap-2.5 px-3.5 h-11 rounded-xl border border-warm-200 bg-warm-50 cursor-pointer hover:border-accent/60 transition">
+                      <label className={cn("flex items-center gap-2.5 px-3.5 h-11 rounded-xl border border-warm-200 bg-warm-50 cursor-pointer hover:border-accent/60 transition", errors.businessType && "border-red-400")}>
                         <input
                           type="checkbox"
                           checked={signup.isLtd}
-                          onChange={(e) =>
+                          onChange={(e) => {
                             setSignup({
                               ...signup,
                               isLtd: e.target.checked,
                               isSoleTrader: e.target.checked ? false : signup.isSoleTrader,
-                            })
-                          }
+                            });
+                            setErrors((prev) => ({ ...prev, businessType: "" }));
+                          }}
                           className="w-4 h-4 accent-accent"
                         />
                         <span className="text-sm text-ink-900">Ltd company</span>
                       </label>
-                      <label className="flex items-center gap-2.5 px-3.5 h-11 rounded-xl border border-warm-200 bg-warm-50 cursor-pointer hover:border-accent/60 transition">
+                      <label className={cn("flex items-center gap-2.5 px-3.5 h-11 rounded-xl border border-warm-200 bg-warm-50 cursor-pointer hover:border-accent/60 transition", errors.businessType && "border-red-400")}>
                         <input
                           type="checkbox"
                           checked={signup.isSoleTrader}
-                          onChange={(e) =>
+                          onChange={(e) => {
                             setSignup({
                               ...signup,
                               isSoleTrader: e.target.checked,
                               isLtd: e.target.checked ? false : signup.isLtd,
-                            })
-                          }
+                            });
+                            setErrors((prev) => ({ ...prev, businessType: "" }));
+                          }}
                           className="w-4 h-4 accent-accent"
                         />
                         <span className="text-sm text-ink-900">Sole trader</span>
                       </label>
                     </div>
+                    {errors.businessType && <p className={errTextCls}>{errors.businessType}</p>}
                   </div>
 
                   <div>
                     <label className={labelCls}>Number of directors</label>
                     <input
                       type="number"
-                      min={0}
+                      min={1}
                       value={signup.numberOfDirectors}
-                      onChange={(e) => setSignup({ ...signup, numberOfDirectors: e.target.value })}
-                      className={inputCls}
+                      onChange={(e) => setSignupField("numberOfDirectors", e.target.value)}
+                      className={cn(inputCls, errors.numberOfDirectors && errInputCls)}
                       placeholder="e.g. 2"
                     />
+                    {errors.numberOfDirectors && <p className={errTextCls}>{errors.numberOfDirectors}</p>}
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -491,20 +499,22 @@ export default function TradesLogin() {
                       <input
                         type="text"
                         value={signup.contactName}
-                        onChange={(e) => setSignup({ ...signup, contactName: e.target.value })}
-                        className={inputCls}
+                        onChange={(e) => setSignupField("contactName", e.target.value)}
+                        className={cn(inputCls, errors.contactName && errInputCls)}
                         placeholder="Jane Smith"
                       />
+                      {errors.contactName && <p className={errTextCls}>{errors.contactName}</p>}
                     </div>
                     <div>
                       <label className={labelCls}>Contact number</label>
                       <input
                         type="tel"
                         value={signup.contactNumber}
-                        onChange={(e) => setSignup({ ...signup, contactNumber: e.target.value })}
-                        className={inputCls}
+                        onChange={(e) => setSignupField("contactNumber", e.target.value)}
+                        className={cn(inputCls, errors.contactNumber && errInputCls)}
                         placeholder="07000 000000"
                       />
+                      {errors.contactNumber && <p className={errTextCls}>{errors.contactNumber}</p>}
                     </div>
                   </div>
 
@@ -514,10 +524,11 @@ export default function TradesLogin() {
                       type="email"
                       autoComplete="email"
                       value={signup.email}
-                      onChange={(e) => setSignup({ ...signup, email: e.target.value })}
-                      className={inputCls}
+                      onChange={(e) => setSignupField("email", e.target.value)}
+                      className={cn(inputCls, errors.email && errInputCls)}
                       placeholder="you@company.co.uk"
                     />
+                    {errors.email && <p className={errTextCls}>{errors.email}</p>}
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -527,10 +538,11 @@ export default function TradesLogin() {
                         type="password"
                         autoComplete="new-password"
                         value={signup.password}
-                        onChange={(e) => setSignup({ ...signup, password: e.target.value })}
-                        className={inputCls}
+                        onChange={(e) => setSignupField("password", e.target.value)}
+                        className={cn(inputCls, errors.password && errInputCls)}
                         placeholder="Min. 6 characters"
                       />
+                      {errors.password && <p className={errTextCls}>{errors.password}</p>}
                     </div>
                     <div>
                       <label className={labelCls}>Confirm password *</label>
@@ -538,10 +550,11 @@ export default function TradesLogin() {
                         type="password"
                         autoComplete="new-password"
                         value={signup.confirmPassword}
-                        onChange={(e) => setSignup({ ...signup, confirmPassword: e.target.value })}
-                        className={inputCls}
+                        onChange={(e) => setSignupField("confirmPassword", e.target.value)}
+                        className={cn(inputCls, errors.confirmPassword && errInputCls)}
                         placeholder="Repeat password"
                       />
+                      {errors.confirmPassword && <p className={errTextCls}>{errors.confirmPassword}</p>}
                     </div>
                   </div>
 
