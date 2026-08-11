@@ -278,17 +278,17 @@ export default function TradesLogin() {
           </div>
 
           <div className="bg-warm-50 rounded-2xl shadow-lifted border border-warm-200 overflow-hidden">
-            <div className="grid grid-cols-2 border-b border-warm-200">
+            <div className="grid grid-cols-2 gap-2 p-2 border-b border-warm-200">
               <button
                 type="button"
                 onClick={() => {
                   setTab("login");
                   resetForgotState();
                 }}
-                className={`py-3.5 text-sm font-semibold tracking-wide transition ${
+                className={`flex items-center justify-center py-3 text-sm font-semibold tracking-wide rounded-xl border-2 transition ${
                   tab === "login"
-                    ? "bg-warm-50 text-ink-900 border-b-2 border-accent -mb-px"
-                    : "bg-warm-100 text-ink-500 hover:text-ink-900"
+                    ? "bg-warm-50 text-ink-900 border-warm-200 shadow-sm"
+                    : "bg-warm-100 text-ink-500 border-transparent hover:text-ink-900"
                 }`}
               >
                 Login
@@ -299,10 +299,10 @@ export default function TradesLogin() {
                   setTab("signup");
                   resetForgotState();
                 }}
-                className={`py-3.5 text-sm font-semibold tracking-wide transition border-2 border-accent ${
+                className={`flex items-center justify-center py-3 text-sm font-semibold tracking-wide rounded-xl border-4 border-accent transition ${
                   tab === "signup"
-                    ? "bg-warm-50 text-ink-900"
-                    : "bg-warm-100 text-ink-500 hover:text-ink-900"
+                    ? "bg-accent text-accent-foreground"
+                    : "bg-warm-50 text-ink-900 hover:bg-warm-100"
                 }`}
               >
                 Sign up
