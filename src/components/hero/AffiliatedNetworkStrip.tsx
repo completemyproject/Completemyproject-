@@ -1,5 +1,8 @@
 import { AFFILIATES } from "@/data/affiliates";
 
+// Duplicate the list so the marquee track can loop seamlessly (animation translates it -50%).
+const MARQUEE_ITEMS = [...AFFILIATES, ...AFFILIATES];
+
 export default function AffiliatedNetworkStrip() {
   return (
     <section aria-labelledby="partners-heading" className="py-10 sm:py-16 bg-warm-100 border-y border-warm-200">
@@ -14,23 +17,30 @@ export default function AffiliatedNetworkStrip() {
           </h2>
         </div>
 
-        <div className="flex flex-nowrap items-center justify-start sm:justify-center gap-3 sm:gap-6 lg:gap-8 overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0 sm:overflow-visible">
-          {AFFILIATES.map((affiliate) => (
-            <a
-              key={affiliate.name}
-              href={affiliate.url}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              title={affiliate.name}
-              className="flex items-center justify-center shrink-0 h-20 w-36 sm:h-16 sm:w-32 lg:h-24 lg:w-[200px] rounded-xl border border-warm-200 bg-white p-2.5"
-            >
-              <img
-                src={affiliate.logo}
-                alt={affiliate.name}
-                className="max-h-full max-w-full object-contain"
-              />
-            </a>
-          ))}
+        <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] motion-reduce:overflow-x-auto">
+          <div className="flex w-max items-center animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+            {MARQUEE_ITEMS.map((affiliate, i) => {
+              const isClone = i >= AFFILIATES.length;
+              return (
+                <a
+                  key={`${affiliate.name}-${i}`}
+                  href={affiliate.url}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  title={affiliate.name}
+                  aria-hidden={isClone || undefined}
+                  tabIndex={isClone ? -1 : undefined}
+                  className="flex items-center justify-center shrink-0 mr-3 sm:mr-6 lg:mr-8 h-20 w-36 sm:h-16 sm:w-32 lg:h-24 lg:w-[200px] rounded-xl border border-warm-200 bg-white p-2.5"
+                >
+                  <img
+                    src={affiliate.logo}
+                    alt={affiliate.name}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
