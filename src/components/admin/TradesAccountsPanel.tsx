@@ -63,7 +63,7 @@ export function TradesAccountsPanel({
   onRequestConfirm,
 }: Props) {
   const [statusFilter, setStatusFilter] = useState(defaultStatusFilter);
-  const [typeFilter, setTypeFilter] = useState("all");
+  // business type removed — no type filter
   const [selected, setSelected] = useState<ContractorProfile | null>(null);
   const [acting, setActing] = useState(false);
 
@@ -80,13 +80,11 @@ export function TradesAccountsPanel({
   const filtered = useMemo(() => {
     return accounts.filter((a) => {
       if (statusFilter !== "all" && a.status !== statusFilter) return false;
-      if (typeFilter !== "all" && a.business_type !== typeFilter) return false;
       return true;
     });
-  }, [accounts, statusFilter, typeFilter]);
+  }, [accounts, statusFilter]);
 
-  const formatBusinessType = (type: string) =>
-    type === "ltd" ? "Ltd company" : type === "sole_trader" ? "Sole trader" : type.replace("_", " ");
+  // business type display removed
 
   const confirmApprove = (profile: ContractorProfile) => {
     onRequestConfirm({
@@ -159,16 +157,7 @@ export function TradesAccountsPanel({
                 <SelectItem value="rejected">Rejected</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="w-full sm:w-36 h-9 border-warm-200 text-sm">
-                <SelectValue placeholder="All types" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All types</SelectItem>
-                <SelectItem value="ltd">Ltd company</SelectItem>
-                <SelectItem value="sole_trader">Sole trader</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* business type filter removed */}
             <button
               type="button"
               onClick={onRefresh}
@@ -199,7 +188,7 @@ export function TradesAccountsPanel({
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="min-w-0">
                       <p className="font-semibold text-ink-900">{app.business_name}</p>
-                      <p className="text-xs text-ink-500 mt-0.5">{formatBusinessType(app.business_type)}</p>
+                      {/* business type removed from list */}
                     </div>
                     <span
                       className={`text-xs font-semibold px-2.5 py-1 rounded-full border shrink-0 ${STATUS_STYLE[app.status] || "bg-warm-100 text-ink-600 border-warm-200"}`}
@@ -245,7 +234,7 @@ export function TradesAccountsPanel({
                     <tr key={app.id} className="hover:bg-warm-50 transition align-top">
                       <td className="py-4 px-4">
                         <p className="font-semibold text-ink-900">{app.business_name}</p>
-                        <p className="text-xs text-ink-500 mt-0.5">{formatBusinessType(app.business_type)}</p>
+                        {/* business type removed from list */}
                       </td>
                       <td className="py-4 px-4 font-medium text-ink-900">
                         <p>{app.contact_name}</p>
@@ -309,20 +298,7 @@ export function TradesAccountsPanel({
                       label="Company number"
                       value={selected.company_number || "—"}
                     />
-                    <DetailRow
-                      icon={Building2}
-                      label="Business type"
-                      value={formatBusinessType(selected.business_type)}
-                    />
-                    <DetailRow
-                      icon={Users}
-                      label="Number of directors"
-                      value={
-                        selected.number_of_directors != null
-                          ? String(selected.number_of_directors)
-                          : "—"
-                      }
-                    />
+                    {/* business type and number of directors removed from details */}
                   </ul>
                 </section>
 

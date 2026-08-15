@@ -22,19 +22,10 @@ const profileSchema = z
   .object({
     businessName: z.string().trim().min(2, "Business name is required").max(150),
     companyNumber: z.string().trim().max(50).optional(),
-    numberOfDirectors: z.string().trim().optional(),
     contactName: z.string().trim().min(2, "Contact name is required").max(100),
     contactPhone: z.string().trim().max(30).optional(),
   })
-  .superRefine((data, ctx) => {
-    if (data.numberOfDirectors && !/^\d+$/.test(data.numberOfDirectors)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Enter a valid number of directors",
-        path: ["numberOfDirectors"],
-      });
-    }
-  });
+  .superRefine(() => {});
 
 const passwordSchema = z
   .object({
@@ -52,9 +43,7 @@ const readOnlyCls =
   "w-full h-11 px-3.5 rounded-xl border border-warm-200 bg-warm-50 text-sm text-ink-600 cursor-not-allowed";
 const labelCls = "block text-xs font-semibold text-ink-700 mb-1.5";
 
-function formatBusinessType(type: string) {
-  return type === "ltd" ? "Ltd company" : type === "sole_trader" ? "Sole trader" : type;
-}
+
 
 function SectionHeading({ title }: { title: string }) {
   return (
@@ -86,12 +75,9 @@ export function TradesSettingsPanel({ profile, onProfileUpdated }: Props) {
   const [profileErrors, setProfileErrors] = useState<Record<string, string>>({});
   const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({});
 
-  const isLtd = profile.business_type === "ltd";
-
   const [profileForm, setProfileForm] = useState({
     businessName: profile.business_name,
     companyNumber: profile.company_number ?? "",
-    numberOfDirectors: profile.number_of_directors?.toString() ?? "",
     contactName: profile.contact_name,
     contactPhone: profile.contact_phone ?? "",
   });
@@ -105,7 +91,6 @@ export function TradesSettingsPanel({ profile, onProfileUpdated }: Props) {
     setProfileForm({
       businessName: profile.business_name,
       companyNumber: profile.company_number ?? "",
-      numberOfDirectors: profile.number_of_directors?.toString() ?? "",
       contactName: profile.contact_name,
       contactPhone: profile.contact_phone ?? "",
     });
@@ -126,12 +111,8 @@ export function TradesSettingsPanel({ profile, onProfileUpdated }: Props) {
       return;
     }
 
-    const directors =
-      isLtd && parsed.data.numberOfDirectors
-        ? parseInt(parsed.data.numberOfDirectors, 10)
-        : isLtd
-          ? profile.number_of_directors
-          : null;
+    // Do not allow editing business type or directors here — preserve existing value
+    const directors = profile.number_of_directors ?? null;
 
     setSavingProfile(true);
     const { profile: updated, error } = await updateContractorProfile(profile.user_id, {
@@ -270,20 +251,6 @@ export function TradesSettingsPanel({ profile, onProfileUpdated }: Props) {
               </div>
 
               <div>
-                <label className={labelCls} htmlFor="businessType">
-                  Business type
-                </label>
-                <input
-                  id="businessType"
-                  className={readOnlyCls}
-                  value={formatBusinessType(profile.business_type)}
-                  readOnly
-                  tabIndex={-1}
-                />
-                <p className="text-xs text-ink-500 mt-1.5">Set when you applied and cannot be changed.</p>
-              </div>
-
-              <div>
                 <label className={labelCls} htmlFor="companyNumber">
                   Company number
                 </label>
@@ -298,27 +265,7 @@ export function TradesSettingsPanel({ profile, onProfileUpdated }: Props) {
                 />
               </div>
 
-              {isLtd && (
-                <div className="sm:col-span-2 sm:max-w-xs">
-                  <label className={labelCls} htmlFor="numberOfDirectors">
-                    Number of directors
-                  </label>
-                  <input
-                    id="numberOfDirectors"
-                    type="number"
-                    min={1}
-                    className={inputCls}
-                    placeholder="Optional"
-                    value={profileForm.numberOfDirectors}
-                    onChange={(e) =>
-                      setProfileForm((f) => ({ ...f, numberOfDirectors: e.target.value }))
-                    }
-                  />
-                  {profileErrors.numberOfDirectors && (
-                    <p className="text-xs text-red-600 mt-1">{profileErrors.numberOfDirectors}</p>
-                  )}
-                </div>
-              )}
+              
             </div>
           </section>
 

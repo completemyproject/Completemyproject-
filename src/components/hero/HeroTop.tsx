@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShieldCheck, Umbrella, RefreshCw, Clock } from "lucide-react";
+import { UserRoundCheck, BadgePoundSterling, UsersRound, Sparkles, Clock } from "lucide-react";
 import heroPromo from "@/assets/hero-phone-promo.png";
 import { QUICK_SEARCH_CHIPS } from "@/data/services";
 import { HeroSearchBox } from "@/components/hero/HeroSearchBox";
@@ -31,7 +31,7 @@ export default function HeroTop({
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-7">
             <div className="inline-flex items-center bg-warm-100 border border-warm-200 rounded-full px-3 py-1.5 mb-6 animate-fade-up">
-              <span className="text-xs font-semibold text-foreground tracking-tight">Fully vetted UK companies</span>
+              <span className="text-xs font-semibold text-foreground tracking-tight">Company directors are DBS Checked</span>
             </div>
 
             <h1
@@ -86,24 +86,48 @@ export default function HeroTop({
             </div>
 
             <div
-              className={`mt-7 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs sm:text-sm font-semibold text-foreground/75 animate-fade-up transition-opacity ${
+              className={`mt-8  sm:flex items-center justify-between  grid grid-cols-4 gap-x-2 sm:gap-x-4 gap-y-6 max-w-xl animate-fade-up transition-opacity ${
                 suggestionsOpen ? "pointer-events-none opacity-0" : "opacity-100"
               }`}
               style={{ animationDelay: "0.2s" }}
               aria-hidden={suggestionsOpen}
             >
-              <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-oak-600" />
-                DBS checked
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Umbrella className="w-4 h-4 text-oak-600" />
-                Insured
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <RefreshCw className="w-4 h-4 text-oak-600" />
-                Re-verified yearly
-              </span>
+              <div className="flex flex-col items-center text-center gap-2.5">
+                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
+                  <UserRoundCheck className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                </span>
+                <span className="text-[10px] sm:text-sm leading-tight">
+                  <span className="block font-bold text-ink-900">All Directors</span>
+                  <span className="block font-semibold text-oak-600">DBS Checked</span>
+                </span>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2.5">
+                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
+                  <BadgePoundSterling className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                </span>
+                <span className="text-[10px] sm:text-sm leading-tight">
+                  <span className="block font-bold text-ink-900">£1 Million</span>
+                  <span className="block font-semibold text-oak-600">Company Insurance</span>
+                </span>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2.5">
+                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
+                  <UsersRound className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                </span>
+                <span className="text-[10px] sm:text-sm leading-tight">
+                  <span className="block font-bold text-ink-900">3 References</span>
+                  <span className="block font-semibold text-oak-600">Minimum</span>
+                </span>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2.5">
+                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
+                  <Sparkles className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                </span>
+                <span className="text-[10px] sm:text-sm leading-tight">
+                  <span className="block font-bold text-ink-900">Much More</span>
+                  <span className="block font-semibold text-oak-600">Included</span>
+                </span>
+              </div>
             </div>
           </div>
 

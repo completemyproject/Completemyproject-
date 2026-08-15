@@ -124,7 +124,7 @@ export type ContractorSignupPayload = {
   password: string;
   businessName: string;
   companyNumber?: string;
-  businessType: "ltd" | "sole_trader";
+  businessType?: "ltd" | "sole_trader";
   numberOfDirectors?: string;
   contactName: string;
   contactPhone?: string;
@@ -132,6 +132,7 @@ export type ContractorSignupPayload = {
 
 export async function signUpContractor(payload: ContractorSignupPayload) {
   const email = payload.email.trim().toLowerCase();
+  const businessType = payload.businessType ?? "sole_trader";
 
   return supabase.auth.signUp({
     email,
@@ -142,7 +143,7 @@ export async function signUpContractor(payload: ContractorSignupPayload) {
         account_type: "contractor",
         business_name: payload.businessName.trim(),
         company_number: payload.companyNumber?.trim() || "",
-        business_type: payload.businessType,
+        business_type: businessType,
         number_of_directors: payload.numberOfDirectors?.trim() || "",
         contact_name: payload.contactName.trim(),
         contact_phone: payload.contactPhone?.trim() || "",

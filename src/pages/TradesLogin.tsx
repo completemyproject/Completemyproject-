@@ -30,9 +30,6 @@ export default function TradesLogin() {
   const [forgotSent, setForgotSent] = useState(false);
   const [signup, setSignup] = useState({
     businessName: "",
-    isLtd: false,
-    isSoleTrader: false,
-    numberOfDirectors: "",
     contactName: "",
     contactNumber: "",
     email: "",
@@ -144,11 +141,7 @@ export default function TradesLogin() {
   const validateSignup = () => {
     const next: Record<string, string> = {};
     if (!signup.businessName.trim()) next.businessName = "Business name is required.";
-    if (!signup.isLtd && !signup.isSoleTrader) next.businessType = "Select Ltd company or Sole trader.";
-    if (signup.numberOfDirectors.trim()) {
-      const n = Number(signup.numberOfDirectors);
-      if (!Number.isInteger(n) || n < 1) next.numberOfDirectors = "Enter a whole number of 1 or more.";
-    }
+    // no business type selection required (default to sole_trader)
     if (!signup.contactName.trim()) next.contactName = "Contact name is required.";
     if (signup.contactNumber.trim()) {
       const digits = signup.contactNumber.replace(/[\s()+-]/g, "");
@@ -192,8 +185,8 @@ export default function TradesLogin() {
       email: signup.email,
       password: signup.password,
       businessName: signup.businessName,
-      businessType: signup.isLtd ? "ltd" : "sole_trader",
-      numberOfDirectors: signup.numberOfDirectors,
+      // default business type now set by server/frontend to 'sole_trader'
+      businessType: "sole_trader",
       contactName: signup.contactName,
       contactPhone: signup.contactNumber,
     });
@@ -213,7 +206,6 @@ export default function TradesLogin() {
       contactName: signup.contactName,
       businessName: signup.businessName,
       phone: signup.contactNumber || undefined,
-      businessType: signup.isLtd ? "Ltd company" : "Sole trader",
     });
 
     if (data.session) {
@@ -234,9 +226,6 @@ export default function TradesLogin() {
     setLogin({ email: signup.email.trim().toLowerCase(), password: "" });
     setSignup({
       businessName: "",
-      isLtd: false,
-      isSoleTrader: false,
-      numberOfDirectors: "",
       contactName: "",
       contactNumber: "",
       email: "",
@@ -441,57 +430,7 @@ export default function TradesLogin() {
                     {errors.businessName && <p className={errTextCls}>{errors.businessName}</p>}
                   </div>
 
-                  <div>
-                    <label className={labelCls}>Business type *</label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <label className={cn("flex items-center gap-2.5 px-3.5 h-11 rounded-xl border border-warm-200 bg-warm-50 cursor-pointer hover:border-accent/60 transition", errors.businessType && "border-red-400")}>
-                        <input
-                          type="checkbox"
-                          checked={signup.isLtd}
-                          onChange={(e) => {
-                            setSignup({
-                              ...signup,
-                              isLtd: e.target.checked,
-                              isSoleTrader: e.target.checked ? false : signup.isSoleTrader,
-                            });
-                            setErrors((prev) => ({ ...prev, businessType: "" }));
-                          }}
-                          className="w-4 h-4 accent-accent"
-                        />
-                        <span className="text-sm text-ink-900">Ltd company</span>
-                      </label>
-                      <label className={cn("flex items-center gap-2.5 px-3.5 h-11 rounded-xl border border-warm-200 bg-warm-50 cursor-pointer hover:border-accent/60 transition", errors.businessType && "border-red-400")}>
-                        <input
-                          type="checkbox"
-                          checked={signup.isSoleTrader}
-                          onChange={(e) => {
-                            setSignup({
-                              ...signup,
-                              isSoleTrader: e.target.checked,
-                              isLtd: e.target.checked ? false : signup.isLtd,
-                            });
-                            setErrors((prev) => ({ ...prev, businessType: "" }));
-                          }}
-                          className="w-4 h-4 accent-accent"
-                        />
-                        <span className="text-sm text-ink-900">Sole trader</span>
-                      </label>
-                    </div>
-                    {errors.businessType && <p className={errTextCls}>{errors.businessType}</p>}
-                  </div>
-
-                  <div>
-                    <label className={labelCls}>Number of directors</label>
-                    <input
-                      type="number"
-                      min={1}
-                      value={signup.numberOfDirectors}
-                      onChange={(e) => setSignupField("numberOfDirectors", e.target.value)}
-                      className={cn(inputCls, errors.numberOfDirectors && errInputCls)}
-                      placeholder="e.g. 2"
-                    />
-                    {errors.numberOfDirectors && <p className={errTextCls}>{errors.numberOfDirectors}</p>}
-                  </div>
+                  {/* Business type removed — default set to 'sole_trader' on signup */}
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
