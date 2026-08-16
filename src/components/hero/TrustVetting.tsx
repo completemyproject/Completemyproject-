@@ -52,6 +52,10 @@ export default function TrustVetting() {
             ))}
           </div>
         </div>
+
+        <p className="mt-8 text-center text-base text-muted-foreground leading-relaxed">
+          We check the company's history and records.
+        </p>
       </div>
     </section>
   );
