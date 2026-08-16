@@ -30,8 +30,10 @@ export default function HeroTop({
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center bg-warm-100 border border-warm-200 rounded-full px-3 py-1.5 mb-6 animate-fade-up">
-              <span className="text-xs font-semibold text-foreground tracking-tight">Company directors are DBS Checked</span>
+            <div className="inline-flex items-center bg-warm-100 border-2 border-oak-600 rounded-full px-3.5 sm:px-4 py-2 mb-6 animate-fade-up">
+              <span className="whitespace-nowrap text-sm sm:text-base font-bold text-ink-900 tracking-tight">
+                Company Directors Are <span className="text-oak-600">DBS Checked</span>
+              </span>
             </div>
 
             <h1
@@ -93,37 +95,37 @@ export default function HeroTop({
               aria-hidden={suggestionsOpen}
             >
               <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
-                  <UserRoundCheck className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+                  <UserRoundCheck className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-[10px] sm:text-sm leading-tight">
+                <span className="text-xs sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">All Directors</span>
                   <span className="block font-semibold text-oak-600">DBS Checked</span>
                 </span>
               </div>
               <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
-                  <BadgePoundSterling className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+                  <BadgePoundSterling className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-[10px] sm:text-sm leading-tight">
+                <span className="text-xs sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">£1 Million</span>
                   <span className="block font-semibold text-oak-600">Company Insurance</span>
                 </span>
               </div>
               <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
-                  <UsersRound className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+                  <UsersRound className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-[10px] sm:text-sm leading-tight">
+                <span className="text-xs sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">3 References</span>
                   <span className="block font-semibold text-oak-600">Minimum</span>
                 </span>
               </div>
               <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 -translate-x-1 rounded-full bg-oak-500/10 text-oak-600">
-                  <Sparkles className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2} />
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+                  <Sparkles className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-[10px] sm:text-sm leading-tight">
+                <span className="text-xs sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">Much More</span>
                   <span className="block font-semibold text-oak-600">Included</span>
                 </span>

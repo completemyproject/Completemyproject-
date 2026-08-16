@@ -17,7 +17,33 @@ export default function AffiliatedNetworkStrip() {
           </h2>
         </div>
 
-        <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] motion-reduce:overflow-x-auto">
+        {/* Mobile: static 3-per-row grid; a lone item on the final row is centred. */}
+        <div className="grid grid-cols-3 gap-2.5 sm:hidden">
+          {AFFILIATES.map((affiliate, i) => {
+            const isLoneOnLastRow = i === AFFILIATES.length - 1 && AFFILIATES.length % 3 === 1;
+            return (
+              <a
+                key={affiliate.name}
+                href={affiliate.url}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                title={affiliate.name}
+                className={`flex items-center justify-center h-20 rounded-xl border border-warm-200 bg-white p-2 ${
+                  isLoneOnLastRow ? "col-start-2" : ""
+                }`}
+              >
+                <img
+                  src={affiliate.logo}
+                  alt={affiliate.name}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </a>
+            );
+          })}
+        </div>
+
+        {/* sm+: auto-scrolling marquee. */}
+        <div className="group relative hidden sm:block overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] motion-reduce:overflow-x-auto">
           <div className="flex w-max items-center animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
             {MARQUEE_ITEMS.map((affiliate, i) => {
               const isClone = i >= AFFILIATES.length;
