@@ -35,7 +35,7 @@ export default function Reviews() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-oak-600 mb-3">Real homeowners</p>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            What customers say about our vetted companies
+            What Customers Say About Our Vetted Companies
           </h2>
         </div>
 

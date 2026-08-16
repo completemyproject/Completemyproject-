@@ -34,7 +34,7 @@ export default function Services() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">Our services</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-ink-900 mb-5 leading-[1.05]">
-            Every trade. <span className="text-oak-600">One company.</span>
+            Every Trade. <span className="text-oak-600">One Company.</span>
           </h1>
           <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed mb-8">
             From kitchens to rooftops — get matched with a vetted multi-trade company that handles your whole project.
@@ -121,7 +121,7 @@ export default function Services() {
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-3">How it works</p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-foreground mb-4">
-              Three steps. Zero stress.
+              Three Steps. Zero Stress.
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">

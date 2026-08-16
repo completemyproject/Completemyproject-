@@ -15,9 +15,16 @@ export default function Services({ searchQuery = "" }: ServicesProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div className="max-w-xl">
+            {!isFiltered && (
+              <div className="inline-flex items-center bg-warm-100 border-2 border-oak-600 rounded-full px-3.5 sm:px-4 py-2 mb-5">
+                <span className="text-sm sm:text-base font-bold text-ink-900 tracking-tight">
+                  We Do More Than Just <span className="text-oak-600">Construction Projects.</span>
+                </span>
+              </div>
+            )}
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-oak-600 mb-3">Categories</p>
             <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground mb-3">
-              {isFiltered ? "Search results" : "Browse our most popular categories"}
+              {isFiltered ? "Search Results" : "Browse Our Most Popular Categories"}
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg">
               {isFiltered

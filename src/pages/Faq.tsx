@@ -30,7 +30,7 @@ export default function Faq() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">Help centre</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-ink-900 mb-5 leading-[1.05]">
-            Frequently asked questions
+            Frequently Asked Questions
           </h1>
           <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Clear answers about how we vet companies, who you pay, and what to expect.
@@ -45,7 +45,7 @@ export default function Faq() {
         <section className="py-16 sm:py-20 bg-card">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
             <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-ink-900 mb-4">
-              Still have a question?
+              Still Have A Question?
             </h2>
             <p className="text-base text-foreground/70 mb-7 max-w-xl mx-auto leading-relaxed">
               Our team responds to every enquiry within one working day.

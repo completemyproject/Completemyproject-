@@ -1,4 +1,4 @@
-import { ShieldCheck, FileCheck2, Umbrella, Sparkles } from "lucide-react";
+import { ShieldCheck, FileCheck2, Umbrella, Images } from "lucide-react";
 
 const VETTING_ITEMS = [
   {
@@ -17,9 +17,9 @@ const VETTING_ITEMS = [
     desc: "All companies hold valid public liability cover, fully checked and renewed annually.",
   },
   {
-    label: "And much more",
-    Icon: Sparkles,
-    desc: "Company history and records, including high-quality images of completed work.",
+    label: "3 before and after",
+    Icon: Images,
+    desc: "We require three before and after or after images of completed jobs carried out by the multi-trade company.",
   },
 ];
 
@@ -30,7 +30,7 @@ export default function TrustVetting() {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-oak-600 mb-3">Trust by design</p>
           <h2 id="vetting-heading" className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground mb-3">
-            What's included in our vetting
+            What's Included In Our Vetting
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
             We don't just do a one-off check, every company is re-verified annually
@@ -42,12 +42,12 @@ export default function TrustVetting() {
         <div className="rounded-2xl bg-card border border-warm-200 shadow-soft overflow-hidden">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-warm-200">
             {VETTING_ITEMS.map(({ label, Icon, desc }) => (
-              <div key={label} className="flex flex-col items-center text-center gap-3 px-5 py-8 sm:py-10">
-                <div className="w-12 h-12 rounded-full bg-warm-100 border border-warm-200 flex items-center justify-center">
-                  <Icon className="w-5.5 h-5.5 text-oak-600" aria-hidden />
+              <div key={label} className="flex flex-col items-center text-center gap-2.5 px-4 sm:px-5 py-6 sm:py-8">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15 flex items-center justify-center">
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8" strokeWidth={2.25} aria-hidden />
                 </div>
-                <span className="text-sm font-bold text-foreground tracking-tight">{label}</span>
-                <p className="text-xs text-muted-foreground leading-relaxed max-w-[18ch]">{desc}</p>
+                <span className="text-sm sm:text-base font-bold text-foreground tracking-tight">{label}</span>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-snug">{desc}</p>
               </div>
             ))}
           </div>

@@ -92,7 +92,7 @@ export default function Contact() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">Contact us</p>
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-            Get in touch
+            Get In Touch
           </h1>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             Have a question, need a quote, or want to join our panel? We'd love to hear from you.
@@ -108,7 +108,7 @@ export default function Contact() {
             <aside className="lg:col-span-5 space-y-6">
               <div className="bg-warm-50 border border-warm-200 rounded-3xl p-7 sm:p-8 shadow-soft">
                 <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground mb-5">
-                  Reach us directly
+                  Reach Us Directly
                 </h2>
                 <ul className="space-y-5">
                   {CONTACTS.map(({ Icon, label, value, href }) => (

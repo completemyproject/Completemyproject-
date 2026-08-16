@@ -88,44 +88,44 @@ export default function HeroTop({
             </div>
 
             <div
-              className={`mt-8  sm:flex items-center justify-between  grid grid-cols-4 gap-x-2 sm:gap-x-4 gap-y-6 max-w-xl animate-fade-up transition-opacity ${
+              className={`mt-8 grid grid-cols-4 gap-x-1 sm:gap-x-3 gap-y-6 max-w-lg animate-fade-up transition-opacity ${
                 suggestionsOpen ? "pointer-events-none opacity-0" : "opacity-100"
               }`}
               style={{ animationDelay: "0.2s" }}
               aria-hidden={suggestionsOpen}
             >
-              <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+              <div className="flex flex-col items-center text-center gap-2">
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
                   <UserRoundCheck className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-xs sm:text-sm leading-tight">
+                <span className="text-[11px] sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">All Directors</span>
                   <span className="block font-semibold text-oak-600">DBS Checked</span>
                 </span>
               </div>
-              <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+              <div className="flex flex-col items-center text-center gap-2">
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
                   <BadgePoundSterling className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-xs sm:text-sm leading-tight">
+                <span className="text-[11px] sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">£1 Million</span>
                   <span className="block font-semibold text-oak-600">Company Insurance</span>
                 </span>
               </div>
-              <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+              <div className="flex flex-col items-center text-center gap-2">
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
                   <UsersRound className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-xs sm:text-sm leading-tight">
+                <span className="text-[11px] sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">3 References</span>
                   <span className="block font-semibold text-oak-600">Minimum</span>
                 </span>
               </div>
-              <div className="flex flex-col items-center text-center gap-2.5">
-                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] -translate-x-1 rounded-full bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
+              <div className="flex flex-col items-center text-center gap-2">
+                <span className="flex items-center justify-center w-[4.25rem] h-[4.25rem] sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl bg-gradient-to-br from-oak-500 to-oak-600 text-white shadow-soft ring-4 ring-oak-500/15">
                   <Sparkles className="w-9 h-9 sm:w-10 sm:h-10" strokeWidth={2.25} />
                 </span>
-                <span className="text-xs sm:text-sm leading-tight">
+                <span className="text-[11px] sm:text-sm leading-tight">
                   <span className="block font-bold text-ink-900">Much More</span>
                   <span className="block font-semibold text-oak-600">Included</span>
                 </span>

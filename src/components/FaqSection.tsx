@@ -18,7 +18,7 @@ export default function FaqSection({ showAll = false, showCta = true, hideHeader
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">FAQ</p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-ink-900 mb-4 leading-[1.05]">
-              Frequently asked questions
+              Frequently Asked Questions
             </h2>
             <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
               Everything you need to know about how Complete My Project works.

@@ -28,8 +28,8 @@ export default function Careers() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">Careers at CMP</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-ink-900 mb-6 leading-[1.05]">
-            Help us fix one of the<br />
-            <span className="text-oak-600">UK's most broken industries.</span>
+            Help Us Fix One Of The<br />
+            <span className="text-oak-600">UK's Most Broken Industries.</span>
           </h1>
           <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed mb-8">
             We're a small, ambitious team on a mission to make home renovations stress-free for every UK homeowner. Want in?
@@ -67,7 +67,7 @@ export default function Careers() {
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-3">How we work</p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-foreground mb-4">
-              Our values, in plain English.
+              Our Values, In Plain English.
             </h2>
             <p className="text-foreground/70 text-base sm:text-lg">No vague slogans — these are the principles we actually hire and fire on.</p>
           </div>
@@ -95,7 +95,7 @@ export default function Careers() {
           <div className="text-center max-w-2xl mx-auto mb-12">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-3">Open roles</p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-foreground mb-4">
-              Find your fit.
+              Find Your Fit.
             </h2>
             <p className="text-foreground/70 text-base sm:text-lg">
               {ROLES.length} positions open right now. Don't see yours? <Link to="/contact" className="text-oak-600 font-semibold hover:underline">Tell us anyway</Link>.
@@ -139,7 +139,7 @@ export default function Careers() {
       <section className="py-20 sm:py-24 bg-warm-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-foreground mb-5 leading-[1.05]">
-            Don't see the perfect role?
+            Don't See The Perfect Role?
           </h2>
           <p className="text-foreground/70 text-base sm:text-lg mb-8 leading-relaxed">
             We're always keen to hear from talented people who care about what we're building. Drop us a line.

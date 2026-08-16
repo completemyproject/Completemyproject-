@@ -259,7 +259,7 @@ export default function TradesLogin() {
               For tradespeople
             </p>
             <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-900 mb-3">
-              Tradesperson portal
+              Tradesperson Portal
             </h1>
             <p className="text-sm text-ink-500 max-w-md mx-auto">
               Log in to your dashboard or apply to join our vetted panel of multi-trade companies.

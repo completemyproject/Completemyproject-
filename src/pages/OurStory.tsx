@@ -29,8 +29,8 @@ export default function OurStory() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">Our Story</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-ink-900 mb-6 leading-[1.05]">
-            Born from frustration.<br />
-            <span className="text-oak-600">Built for homeowners.</span>
+            Born From Frustration.<br />
+            <span className="text-oak-600">Built For Homeowners.</span>
           </h1>
           <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             The story behind Complete My Project — and why we exist to take the stress out of renovations.
@@ -84,7 +84,7 @@ export default function OurStory() {
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-3">The problem</p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-foreground mb-4">
-              Sound familiar?
+              Sound Familiar?
             </h2>
             <p className="text-foreground/70 text-base sm:text-lg">
               These are the headaches we set out to eliminate — for good.
@@ -112,7 +112,7 @@ export default function OurStory() {
             <div className="lg:col-span-5">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-3">Our mission</p>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-foreground mb-6 leading-[1.05]">
-                A smooth, positive experience — every single time.
+                A Smooth, Positive Experience — Every Single Time.
               </h2>
               <p className="text-foreground/70 text-base sm:text-lg leading-relaxed mb-8">
                 Our goal is simple: to ensure every customer has a smooth, positive experience when using Complete My Project. We do that by handing the heavy lifting to vetted multi-trade companies who actually deliver.

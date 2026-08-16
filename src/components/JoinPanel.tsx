@@ -14,8 +14,8 @@ export default function JoinPanel() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent mb-4">For tradespeople</p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.05] mb-5">
-              Multi-trade company,<br />
-              <span className="text-accent">join our panel</span>
+              Multi-Trade Company,<br />
+              <span className="text-accent">Join Our Panel</span>
             </h2>
             <p className="text-warm-50/70 text-base sm:text-lg leading-relaxed mb-8 max-w-md">
               It's free to join, simply tick the box and complete the form. A member

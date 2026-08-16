@@ -20,8 +20,8 @@ export default function AppShowcase() {
             </div>
 
             <h2 className="font-display text-[2rem] sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-ink-900 mb-5 sm:mb-6 leading-[0.98]">
-              Your renovation,<br />
-              <span className="text-oak-600">in your pocket.</span>
+              Your Renovation,<br />
+              <span className="text-oak-600">In Your Pocket.</span>
             </h2>
 
             <p className="text-base sm:text-xl text-foreground/75 leading-relaxed mb-8 sm:mb-10 max-w-xl">

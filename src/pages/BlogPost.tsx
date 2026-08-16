@@ -164,7 +164,7 @@ export default function BlogPost() {
           {/* CTA */}
           <div className="mt-14 bg-ink-900 text-warm-50 rounded-3xl p-8 sm:p-10 shadow-lifted">
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight mb-3 leading-tight">
-              Ready to start your project?
+              Ready To Start Your Project?
             </h2>
             <p className="text-warm-50/70 leading-relaxed mb-6 max-w-lg">
               Get matched with two vetted multi-trade companies in under two minutes. One project, one price, zero stress.
@@ -183,7 +183,7 @@ export default function BlogPost() {
           <section className="bg-warm-50 py-16 border-t border-warm-200">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
               <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground mb-8">
-                Keep reading
+                Keep Reading
               </h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {related.map((p) => (

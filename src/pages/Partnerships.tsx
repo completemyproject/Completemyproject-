@@ -124,7 +124,7 @@ export default function Partnerships() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600 mb-4">Why partner with CMP</p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-ink-900 mb-5 leading-[1.1]">
-                Best-in-class service for your clients.
+                Best-In-Class Service For Your Clients.
               </h2>
               <p className="text-base sm:text-lg text-foreground/75 leading-relaxed mb-5">
                 Confidently introduce your clients to vetted, reliable companies — so they never come back saying they were let down or overcharged.
@@ -181,7 +181,7 @@ export default function Partnerships() {
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-oak-600">Who we partner with</p>
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-[-0.02em] text-ink-900 mb-3 leading-[1.15]">
-                Built for property professionals.
+                Built For Property Professionals.
               </h3>
               <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
                 If you work with clients who have property or construction projects, you can refer them to trusted vetted companies through us.
@@ -209,7 +209,7 @@ export default function Partnerships() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <div className="text-center mb-10">
             <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] text-ink-900 mb-3 leading-[1.1]">
-              Become a partner
+              Become A Partner
             </h2>
             <p className="text-base text-foreground/70 max-w-xl mx-auto leading-relaxed">
               Tell us about your business — we'll be in touch within one working day.

@@ -16,7 +16,7 @@ export default function HowItWorksTabs() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-oak-600 mb-3">A simple journey</p>
           <h2 id="how-it-works-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
-            How it works
+            How It Works
           </h2>
           <p className="mt-4 text-foreground/70 text-base sm:text-lg">Three simple steps from idea to finished project.</p>
         </div>

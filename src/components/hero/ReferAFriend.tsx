@@ -14,7 +14,7 @@ export default function ReferAFriend() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-oak-600 mb-3">Rewards programme</p>
           <h2 id="refer-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
-            Earn £150–£250 for successful referrals
+            Earn £150–£250 For Successful Referrals
           </h2>
         </div>
 

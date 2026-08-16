@@ -51,7 +51,7 @@ export default function DidYouKnow() {
             id="did-you-know-heading"
             className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
           >
-            Did you know?
+            Did You Know?
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
             The UK home renovation market has a trust problem. Here's why a vetted network matters.
