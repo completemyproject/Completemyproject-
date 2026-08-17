@@ -53,9 +53,13 @@ export default function TrustVetting() {
           </div>
         </div>
 
-        <p className="mt-8 text-center text-base text-muted-foreground leading-relaxed">
-          We check the company's history and records.
-        </p>
+        <div className="flex justify-center mt-8">
+          <div className="inline-flex items-center bg-warm-100 border-2 border-oak-600 rounded-full px-3.5 sm:px-4 py-2">
+            <span className="text-sm sm:text-base font-bold text-ink-900 tracking-tight">
+              We Check The Company's <span className="text-oak-600">History And Records.</span>
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );
