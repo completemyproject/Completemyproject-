@@ -29,6 +29,7 @@ const Privacy = () => {
                 <li><strong>For Customers:</strong> Name, contact details (email/phone), project address, and project requirements.</li>
                 <li><strong>For Service Providers (Builders):</strong> Director names, business address, contact details, insurance documents, and DBS verification status.</li>
                 <li><strong>Technical Data:</strong> IP address, browser type, and cookies for website functionality.</li>
+                <li><strong>Property &amp; Site Data:</strong> Interior and exterior photographs of the property, site measurements, layout notes, and technical project specifications gathered during phone consultations or in-person site visits.</li>
               </ul>
             </section>
 
@@ -39,6 +40,7 @@ const Privacy = () => {
                 <li><strong>Contractual Necessity:</strong> To introduce Customers to Service Providers.</li>
                 <li><strong>Legitimate Interests:</strong> To vet Service Providers and ensure the safety of our platform.</li>
                 <li><strong>Consent:</strong> For marketing communications (where you have explicitly opted in).</li>
+                <li><strong>Site Scoping &amp; Media Sharing:</strong> We use site photos, measurements, and project notes to create a &ldquo;Project Scope Brief.&rdquo; This brief is shared exclusively with our vetted Multi-Trade Companies so they can review the work before conducting their own site inspection and issuing a quote.</li>
               </ul>
             </section>
 

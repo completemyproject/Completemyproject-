@@ -2,9 +2,26 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const STEPS = [
-  { number: "01", title: "Fill in a quick form", desc: "Provide your contact details and outline your project." },
-  { number: "02", title: "Get matched", desc: "A multi-trade company (no more than three options), which has been fully vetted, will contact you and provide a quote." },
-  { number: "03", title: "Get one fixed quote", desc: "They provide a single price for the entire job. One point of contact. Zero coordination stress." },
+  {
+    number: "01",
+    title: "Submit Your Project",
+    desc: "Fill in our online form with your project details and contact information.",
+  },
+  {
+    number: "02",
+    title: "Discovery & Scope Assessment",
+    desc: "CMP will contact you to review your exact requirements. For larger or more complex projects, a CMP specialist may carry out a free site visit to take measurements, gather photos, and outline a detailed job scope.",
+  },
+  {
+    number: "03",
+    title: "Vetted Match & Scope Briefing",
+    desc: "We match your project specifications with our panel of vetted multi-trade companies, ensuring they have all the accurate details needed to prepare realistic estimates.",
+  },
+  {
+    number: "04",
+    title: "Site Survey & Direct Quote",
+    desc: "Your matched multi-trade company will contact you directly to confirm site details and provide your official quote.",
+  },
 ];
 
 export default function HowItWorksTabs() {
@@ -18,13 +35,13 @@ export default function HowItWorksTabs() {
           <h2 id="how-it-works-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
             How It Works
           </h2>
-          <p className="mt-4 text-foreground/70 text-base sm:text-lg">Three simple steps from idea to finished project.</p>
+          <p className="mt-4 text-foreground/70 text-base sm:text-lg">Four simple steps from idea to finished project.</p>
         </div>
 
         <div className="relative">
           <div aria-hidden className="hidden md:block absolute top-6 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-warm-200 to-transparent" />
 
-          <ol className="grid md:grid-cols-3 gap-8 md:gap-6 relative">
+          <ol className="grid md:grid-cols-4 gap-8 md:gap-6 relative">
             {STEPS.map((step, i) => (
               <li key={step.number} className="relative">
                 {i < STEPS.length - 1 && (
@@ -37,7 +54,7 @@ export default function HowItWorksTabs() {
                   <div className="flex-1 md:max-w-xs">
                     <h3 className="font-display text-lg font-bold text-foreground mb-2 tracking-tight">{step.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
-                    {i === 1 && (
+                    {i === 0 && (
                       <div className="flex justify-center mt-4">
                         <button
                           type="button"

@@ -282,7 +282,7 @@ export default function GetQuotes() {
                         </FormControl>
                         <div className="space-y-1 leading-none">
                           <FormLabel className="text-sm font-normal text-muted-foreground cursor-pointer">
-                            <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">Completemyproject.co.uk</a> is here to help you find and connect with muti-trade companies. We take great care in vetting the professionals we introduce, but the work is completed by the muti-trade companies themselves, who are responsible for their own services.{" "}
+                            <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">Completemyproject.co.uk</a> is here to help you find and connect with muti-trade companies. We can discuss your project over the phone and, if needed, arrange a site visit. We take great care in vetting the professionals we introduce, but the work is completed by the muti-trade companies themselves, who are responsible for their own services.{" "}
                             <Link to="/terms" className="text-accent underline underline-offset-2 hover:text-accent/80 font-medium">
                               Read full Terms & Conditions
                             </Link>

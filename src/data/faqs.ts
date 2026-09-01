@@ -40,4 +40,8 @@ export const FAQS: Faq[] = [
     q: "Can I see the multi-trade company directors DBS certificate?",
     a: "For privacy and GDPR reasons, we do not share the physical certificate. However, we provide a \"Verified\" status on their profile, which confirms that we have seen and approved their latest check within the last 12 months.",
   },
+  {
+    q: "Will CMP visit my home before matching me with a builder?",
+    a: "It depends on your project! We will always contact you to discuss your requirements. For straightforward jobs, a phone consultation is usually enough. For larger multi-trade projects, we may conduct an in-person site visit to gather accurate measurements and photos so our vetted builders can provide realistic pricing.",
+  },
 ];

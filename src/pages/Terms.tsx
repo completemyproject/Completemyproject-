@@ -169,6 +169,30 @@ const Terms = () => {
                 <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">Completemyproject.co.uk</a> accepts zero liability, financial accountability, or duty of care in relation to the personal conduct, criminal history, or screening status of individual site operatives, sub-contracted tradespeople, or employees brought onto the Customer's premises by the Multi-Trade Company.
               </p>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">13. Initial Scoping &amp; Site Visits</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">13.1 Purpose of Site Visits</h3>
+              <p className="mb-3">
+                Where CMP conducts an in-person site visit or telephone scoping assessment, this service is provided strictly to gather basic project specifications, photos, and customer preferences to match you with an appropriate Service Provider.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">13.2 No Technical/Structural Surveys</h3>
+              <p className="mb-3">
+                CMP's scoping assessments do not constitute an architectural, structural, or quantity survey. CMP assumes no liability for hidden defects, structural issues, or unobserved property conditions that are not identified during an initial scoping visit.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">13.3 Property Access &amp; Safety</h3>
+              <p className="mb-3">
+                During any site visit, the Customer agrees to provide safe access to the relevant areas of the property. CMP representatives reserve the right to decline entering any area deemed unsafe or hazardous.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">13.4 Final Quotations</h3>
+              <p>
+                The project scope produced by CMP is for guidance only. The Multi-Trade Company remains solely responsible for conducting its own technical survey and issuing the official, binding contract and quote to the Customer.
+              </p>
+            </section>
           </div>
         </div>
       </main>
