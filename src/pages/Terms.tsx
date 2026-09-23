@@ -109,8 +109,11 @@ const Terms = () => {
               <p className="mb-3">
                 If a referral results in a project with a value of less than £25,000, the referral fee payable will be £150. For any project with a value of £25,000 or more, the introducer will receive a referral fee of £250. For projects with a total value of less than £8,000, <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">Completemyproject.co.uk</a> may agree a reduced referral fee with the introducer at its discretion.
               </p>
-              <p>
+              <p className="mb-3">
                 Referral fees are payable only once <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">Completemyproject.co.uk</a> has received full payment for the project. Payment of the referral fee is also subject to the introducer providing a valid invoice.
+              </p>
+              <p>
+                Subject to the value of the project, CMP may require an Introducer Agreement to be completed and signed by any individual referring a friend before any referral payment is made.
               </p>
             </section>
 
@@ -191,6 +194,106 @@ const Terms = () => {
               <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">13.4 Final Quotations</h3>
               <p>
                 The project scope produced by CMP is for guidance only. The Multi-Trade Company remains solely responsible for conducting its own technical survey and issuing the official, binding contract and quote to the Customer.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">14. Partnership Opportunity Document &amp; Any Introducers</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">14.1 Introduction</h3>
+              <p className="mb-3">
+                Complete My Project may enter into arrangements with individuals, businesses, multi-trade companies, contractors, consultants, or other third parties (&ldquo;Introducers&rdquo;) who introduce prospective clients or business opportunities to Complete My Project.
+              </p>
+              <p>
+                These terms apply equally to introductions of individual clients and multi-trade companies or other commercial organisations.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">14.2 Introduction Commission</h3>
+              <p className="mb-3">
+                Subject to the terms below, Complete My Project will pay the Introducer a commission equal to 10% of the net amount actually received by Complete My Project from a client or business introduced by the Introducer.
+              </p>
+              <p className="mb-3">
+                For the avoidance of doubt, the commission is calculated on the amount actually received by Complete My Project and not on the value of any quotation, estimate, contract, invoice, or proposed project.
+              </p>
+              <p className="mb-3">
+                For example, if Complete My Project receives £10,000 from an introduced client or business, the Introducer's commission will be £1,000, being 10% of the amount actually received.
+              </p>
+              <p className="mb-3">
+                Each Partnership or Introducer must enter into and sign a separate Introducer Agreement with Complete My Project prior to any referral fee becoming payable.
+              </p>
+              <p>
+                The standard referral fee is 10%; however, Complete My Project may, at its discretion, agree a higher or lower percentage with an individual Partnership or Introducer. The agreed percentage and any other applicable terms will be clearly set out in the relevant signed Introducer Agreement. This ensures that the terms of each partnership are agreed in advance and remain clear and transparent to all parties. Introducers come under the definition of letting agents, businesses, individuals, architects, valuers, and commercial letting agents.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">15. Trade Deals and Third-Party Providers</h2>
+              <p className="mb-3">
+                Any trade deals, offers, discounts, services or quotations displayed, promoted or advertised on the CMP website may be provided by independent third-party multi-trade companies or other external service providers.
+              </p>
+              <p className="mb-3">
+                CMP acts as a marketing and promotional platform in relation to such trade deals. CMP does not itself provide, carry out or supervise the underlying trade services unless expressly stated otherwise.
+              </p>
+              <p>
+                The companies, offers, prices, availability, terms and scope of trade deals displayed on the CMP website may change from time to time. CMP reserves the right to amend, withdraw or replace any trade deal or third-party offer without notice.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">Responsibility for Trade Services</h3>
+              <p className="mb-3">
+                Where a customer chooses to contact, instruct or enter into an agreement with a third-party multi-trade company or other trade provider following an offer or introduction made through CMP, the resulting contract for the supply of goods or services is between the customer and that third-party provider.
+              </p>
+              <p className="mb-3">The third-party provider is solely responsible for:</p>
+              <ul className="list-disc pl-6 space-y-2 mb-3">
+                <li>assessing the customer's requirements;</li>
+                <li>providing quotations and confirming prices;</li>
+                <li>agreeing the scope of works;</li>
+                <li>supplying and carrying out the relevant works or services;</li>
+                <li>ensuring that the works or services are carried out to the required standard;</li>
+                <li>providing any guarantees or warranties offered;</li>
+                <li>dealing with complaints, cancellations, refunds or remedial works relating to its services; and</li>
+                <li>complying with all applicable laws, regulations, licences, insurance requirements and professional obligations applicable to its services.</li>
+              </ul>
+              <p className="mb-3">
+                CMP is not a party to the contract between the customer and the third-party provider and does not control or supervise the third-party provider's performance.
+              </p>
+              <p>
+                CMP therefore accepts no responsibility for the performance, workmanship, quality, timing, availability, pricing or suitability of services supplied by an independent third-party provider, except to the extent that liability cannot lawfully be excluded or limited.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">CMP's Role</h3>
+              <p className="mb-3">
+                CMP's role in relation to third-party trade deals is limited to marketing, advertising and/or facilitating an introduction between the customer and the relevant third-party provider.
+              </p>
+              <p className="mb-3">
+                The appearance of a trade deal, company, service, offer, quotation or provider on the CMP website should not be interpreted as a guarantee, warranty, certification or endorsement by CMP of the provider or of the quality, suitability or outcome of the services offered.
+              </p>
+              <p className="mb-3">
+                Customers are responsible for satisfying themselves as to the identity, suitability, qualifications, insurance, pricing, terms and capabilities of any third-party provider before entering into a contract with that provider.
+              </p>
+              <p>
+                Where a customer proceeds with a third-party provider, any subsequent dispute concerning the provision of the trade services should ordinarily be raised directly with that provider in accordance with the contract between the customer and the provider.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">Accuracy of Third-Party Information</h3>
+              <p className="mb-3">
+                CMP may display information supplied by third-party providers, including descriptions of services, prices, discounts, availability, photographs, qualifications, credentials and other promotional information.
+              </p>
+              <p className="mb-3">
+                While CMP may take reasonable steps to present information accurately, CMP does not guarantee that information supplied by third parties will remain current, complete or accurate at all times. Customers should confirm the current price, scope, availability and terms directly with the relevant provider before entering into any agreement.
+              </p>
+              <p>
+                CMP is not responsible for changes made by a third-party provider to its services, prices, offers, availability or terms after information has been submitted to or published by CMP, subject to any liability which cannot lawfully be excluded or limited.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">No Guarantee of Outcome</h3>
+              <p className="mb-3">
+                CMP does not guarantee that an introduction or marketing activity will result in a quotation, appointment, contract, completed work or particular outcome.
+              </p>
+              <p className="mb-3">
+                Similarly, CMP does not guarantee the availability of any particular trade deal or third-party provider. Trade deals may be changed, suspended or withdrawn by the relevant provider at any time.
+              </p>
+              <p>
+                Nothing in these Terms is intended to exclude or limit any legal rights or remedies that a customer may have under applicable law.
               </p>
             </section>
           </div>
