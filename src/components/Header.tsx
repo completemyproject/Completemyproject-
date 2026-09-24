@@ -44,8 +44,14 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Right side — Get a quote CTA + mobile toggle */}
-          <div className="flex items-center gap-3">
+          {/* Right side — Trades portal shortcut + Get a quote CTA + mobile toggle */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              to="/trades-login"
+              className="lg:hidden inline-flex items-center whitespace-nowrap rounded-full border-[1.5px] border-oak-600 px-3.5 py-1.5 text-xs font-semibold text-oak-600 transition-colors hover:bg-oak-600 hover:text-white"
+            >
+              Trade Login
+            </Link>
             <Link
               to="/get-quotes"
               className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold bg-accent hover:bg-accent/90 text-accent-foreground transition-colors px-4 py-2 rounded-full"
