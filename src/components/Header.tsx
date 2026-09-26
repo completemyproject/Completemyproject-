@@ -27,7 +27,7 @@ export default function Header() {
               src={logo}
               alt="Complete My Project"
               decoding="async"
-              className="h-16 sm:h-20 w-auto object-contain"
+              className="h-16 max-[359px]:h-14 sm:h-20 w-auto object-contain"
             />
           </Link>
 
@@ -48,9 +48,9 @@ export default function Header() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/trades-login"
-              className="lg:hidden inline-flex items-center whitespace-nowrap rounded-full border-[1.5px] border-oak-600 px-3.5 py-1.5 text-xs font-semibold text-oak-600 transition-colors hover:bg-oak-600 hover:text-white"
+              className="lg:hidden inline-flex items-center whitespace-nowrap rounded-full border-[1.5px] border-oak-600 px-3 max-[359px]:px-2.5 py-1.5 text-[11px] max-[359px]:text-[10px] sm:text-xs font-semibold text-oak-600 transition-colors hover:bg-oak-600 hover:text-white"
             >
-              Trade Login
+              Trade Login / Sign Up
             </Link>
             <Link
               to="/get-quotes"
