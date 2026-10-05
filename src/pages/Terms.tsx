@@ -296,6 +296,30 @@ const Terms = () => {
                 Nothing in these Terms is intended to exclude or limit any legal rights or remedies that a customer may have under applicable law.
               </p>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">16. Affiliate Marketing &amp; External Links Disclaimer</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">16.1 Independent Publisher Status</h3>
+              <p>
+                The Platform (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>, operated by Parero Capital Ltd) features links to external partner websites, brand networks, and merchants to display, advertise, or promote third-party goods, tools, and materials. The display of these links or advertisements does not constitute an endorsement, official partnership, joint venture, or agency relationship between the Platform and the affiliate network or merchant.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">16.2 Financial Disclosure (Affiliate Compensation)</h3>
+              <p>
+                The Customer/User acknowledges that the Platform may participate in affiliate marketing programs. This means that if a User clicks on a third-party product link on <a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a> and subsequently purchases a product or service from that third-party merchant, the Platform may receive a financial commission or referral compensation at zero extra cost to the User.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">16.3 Exclusion of Product &amp; Sale Liability</h3>
+              <p className="mb-3">
+                All commercial transactions, product orders, payments, deliveries, warranties, and returns are handled strictly and exclusively by the third-party merchant selling the item. The Platform:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Does not sell, stock, pack, ship, or inspect any third-party physical goods promoted via external links.</li>
+                <li>Gives no representations or warranties regarding the availability, quality, safety, accuracy, or pricing of third-party products.</li>
+                <li>Expressly disclaims all legal liability for any financial loss, product defects, breach of consumer rights, or damages resulting from transactions conducted with external merchants linked from the Platform.</li>
+              </ul>
+            </section>
           </div>
         </div>
       </main>

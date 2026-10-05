@@ -4,7 +4,7 @@ import DidYouKnow from "./hero/DidYouKnow";
 import HowItWorksTabs from "./hero/HowItWorksTabs";
 import ReferAFriend from "./hero/ReferAFriend";
 import AffiliatedNetworkStrip from "./hero/AffiliatedNetworkStrip";
-// import TradeDeals from "./hero/TradeDeals";
+import TradeDeals from "./hero/TradeDeals";
 import IntroVideo from "./hero/IntroVideo";
 
 type HeroProps = {
@@ -29,8 +29,7 @@ export default function Hero({
         onQuickChip={onQuickChip}
       />
       <AffiliatedNetworkStrip />
-      {/* Trade Deals — temporarily hidden. Re-enable by uncommenting. */}
-      {/* <TradeDeals /> */}
+      <TradeDeals />
       <IntroVideo />
       <TrustVetting />
       <DidYouKnow />

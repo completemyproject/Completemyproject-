@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Facebook, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.svg";
 
@@ -19,8 +19,6 @@ const legalLinks = [
 
 const socials = [
   { Icon: Facebook, href: "#", label: "Facebook" },
-  { Icon: Instagram, href: "#", label: "Instagram" },
-  { Icon: Linkedin, href: "#", label: "LinkedIn" },
 ];
 
 export default function Footer() {
@@ -130,9 +128,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-warm-50/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-warm-50/50 text-xs">
-          <p>© {new Date().getFullYear()} Complete My Project. All rights reserved. Registered in England & Wales.</p>
-          <div className="flex items-center gap-3">
+        <div className="border-t border-warm-50/10 pt-8 space-y-3 text-warm-50/50 text-xs">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+            <p>© {new Date().getFullYear()} Complete My Project. All rights reserved. Registered in England & Wales.</p>
             {socials.map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -144,6 +142,12 @@ export default function Footer() {
               </a>
             ))}
           </div>
+          <p className="text-[11px] leading-relaxed text-warm-50/40 max-w-4xl">
+            <span className="font-semibold text-warm-50/60">Affiliate Notice:</span> completemyproject.co.uk contains
+            independent referral links to trade supply networks and merchants. We may earn a small commercial
+            commission on purchases made through these links at no additional cost to you. Orders, product quality,
+            and deliveries are managed entirely by the respective merchant.
+          </p>
         </div>
       </div>
     </footer>

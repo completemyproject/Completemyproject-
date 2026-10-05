@@ -4,21 +4,22 @@ import evChargerDeal from "@/assets/trade-deals/ev-charger.jpg";
 import houseRewireDeal from "@/assets/trade-deals/house-rewire.jpg";
 import suspendedCeilingsDeal from "@/assets/trade-deals/suspended-ceilings.jpg";
 
+// Each image is a complete card design (header, offer, checklist and CTA), cropped to an identical 440×780.
 const TRADE_DEALS = [
+  {
+    title: "Suspended Ceilings",
+    image: suspendedCeilingsDeal,
+    alt: "Discounts on suspended ceilings. Save with our special! High-quality workmanship. Clean, professional service from start to finish. Receive a free consultation.",
+  },
   {
     title: "EV Charger Installation",
     image: evChargerDeal,
-    alt: "Need an EV charger installed? Installed within 14 days or £100 off — receive a free consultation.",
+    alt: "Need an EV charger installed? Installed within 14 days or £100 off. Fully qualified electricians. Safe, compliant installation. Receive a free consultation.",
   },
   {
     title: "Full House Rewire",
     image: houseRewireDeal,
-    alt: "Need a full house rewire? Save up to 15% — receive a free consultation.",
-  },
-  {
-    title: "Suspended Ceilings",
-    image: suspendedCeilingsDeal,
-    alt: "Discounts on suspended ceilings. High-quality workmanship and clean, professional service from start to finish — receive a free consultation.",
+    alt: "Need a full house rewire? Save up to 15%. Fully qualified and insured. Minimal disruption to your home. Receive a free consultation.",
   },
 ];
 
@@ -55,13 +56,15 @@ export default function TradeDeals() {
               <Link
                 to="/get-quotes"
                 title={deal.title}
-                className="group block overflow-hidden rounded-2xl border border-warm-200 bg-card shadow-soft transition-all duration-300 hover:shadow-lifted hover:-translate-y-1.5 hover:border-oak-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className="block rounded-2xl transition-transform duration-300 hover:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
                 <img
                   src={deal.image}
                   alt={deal.alt}
+                  width={440}
+                  height={780}
                   loading="lazy"
-                  className="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  className="w-full h-auto"
                 />
               </Link>
             </li>
