@@ -43,16 +43,9 @@ export default function TradeDeals() {
           </p>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto">
-          {TRADE_DEALS.map((deal, i) => (
-            <li
-              key={deal.title}
-              className={
-                i === TRADE_DEALS.length - 1 && TRADE_DEALS.length % 2 === 1
-                  ? "col-span-2 justify-self-center w-[calc(50%-0.5rem)] sm:col-span-1 sm:w-auto"
-                  : undefined
-              }
-            >
+        <ul className="grid grid-cols-3 gap-1.5 sm:gap-6 -mx-2 sm:mx-auto sm:max-w-2xl">
+          {TRADE_DEALS.map((deal) => (
+            <li key={deal.title}>
               <Link
                 to="/get-quotes"
                 title={deal.title}

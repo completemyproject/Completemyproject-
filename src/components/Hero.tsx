@@ -29,11 +29,11 @@ export default function Hero({
         onQuickChip={onQuickChip}
       />
       <AffiliatedNetworkStrip />
-      <TradeDeals />
       <IntroVideo />
       <TrustVetting />
       <DidYouKnow />
       <HowItWorksTabs />
+      <TradeDeals />
       <ReferAFriend />
     </>
   );
