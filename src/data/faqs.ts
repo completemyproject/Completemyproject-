@@ -18,7 +18,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "What is the \"6-Point Gold Check\"?",
-    a: "We carry out a comprehensive Gold Standard Check on every multi-trade company. This includes a DBS checks on all directors of the company, a minimum of three verified references, and before-and-after project evidence or completed project examples. We also confirm that company accounts are up to date, verify valid professional indemnity insurance with a minimum £1 million cover, and ensure the company's annual return is fully up to date.",
+    a: "We carry out a comprehensive Gold Standard Check on every multi-trade company. This includes a DBS checks on all directors of the company, a minimum of three verified references, and before-and-after project evidence or completed project examples. We also confirm that company accounts are up to date, verify valid public liability insurance with a minimum £1 million cover, and ensure the company's annual return is fully up to date.",
   },
   {
     q: "Who do I pay for the work?",

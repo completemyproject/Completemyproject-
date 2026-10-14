@@ -302,7 +302,7 @@ const Terms = () => {
 
               <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">16.1 Independent Publisher Status</h3>
               <p>
-                The Platform (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>, operated by Parero Capital Ltd) features links to external partner websites, brand networks, and merchants to display, advertise, or promote third-party goods, tools, and materials. The display of these links or advertisements does not constitute an endorsement, official partnership, joint venture, or agency relationship between the Platform and the affiliate network or merchant.
+                The Platform (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>) features links to external partner websites, brand networks, and merchants to display, advertise, or promote third-party goods, tools, and materials. The display of these links or advertisements does not constitute an endorsement, official partnership, joint venture, or agency relationship between the Platform and the affiliate network or merchant.
               </p>
 
               <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">16.2 Financial Disclosure (Affiliate Compensation)</h3>
