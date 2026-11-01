@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Partnerships from "./pages/Partnerships";
 import Faq from "./pages/Faq";
+import TradeInformation from "./pages/TradeInformation";
 import TradesLogin from "./pages/TradesLogin";
 import TradesResetPassword from "./pages/TradesResetPassword";
 import TradesDashboard from "./pages/TradesDashboard";
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/careers" element={<Careers />} />
           <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/trade-information" element={<TradeInformation />} />
           <Route path="/trades-login" element={<TradesLogin />} />
           <Route path="/trades-reset-password" element={<TradesResetPassword />} />
           <Route path="/trades-dashboard" element={<TradesDashboard />} />

@@ -11,6 +11,7 @@ const navItems = [
   { label: "Blog", to: "/blog" },
   { label: "Careers", to: "/careers" },
   { label: "Contact Us", to: "/contact" },
+  { label: "Trade Information", to: "/trade-information" },
   { label: "Trade Login", to: "/trades-login" },
 ];
 
@@ -32,12 +33,12 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-7" aria-label="Primary">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.to}
-                className="relative text-foreground/70 hover:text-foreground text-sm font-medium tracking-tight transition-colors after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                className="relative whitespace-nowrap text-foreground/70 hover:text-foreground text-[13px] xl:text-sm font-medium tracking-tight transition-colors after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
               >
                 {item.label}
               </Link>
