@@ -320,6 +320,35 @@ const Terms = () => {
                 <li>Expressly disclaims all legal liability for any financial loss, product defects, breach of consumer rights, or damages resulting from transactions conducted with external merchants linked from the Platform.</li>
               </ul>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">17. Tendering Intermediary &amp; Agency Limitation of Liability</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">17.1 Intermediary &amp; Facilitator Status</h3>
+              <p>
+                Where the Platform (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>) assists, submits, or tenders for projects, contracts, or procurement opportunities on behalf of a Multi-Trade Contractor, the Platform acts strictly and solely as a commercial introductory agent and administrative facilitator.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">17.2 Absence of Principal Liability &amp; Direct Contractual Privity</h3>
+              <p className="mb-3">
+                The Client / Job Provider explicitly acknowledges and agrees that:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>The Platform is not a main contractor, principal contractor, project manager, guarantor, or joint venture partner to any project resulting from a tender submission.</li>
+                <li>Any contract awarded as a result of a tender process shall be formed strictly and directly between the Client / Job Provider and the appointed Multi-Trade Contractor.</li>
+                <li>The Platform assumes no responsibility, liability, or duty of care for the execution, scheduling, pricing accuracy, or physical delivery of the tendered works.</li>
+              </ul>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">17.3 Exclusion of Liability for Workmanship &amp; Performance</h3>
+              <p>
+                The Platform accepts zero legal, financial, or regulatory liability for any bad workmanship, structural defects, delay damages, property destruction, breach of contract, or personal injury caused by the Multi-Trade Contractor, its employees, or sub-tier operatives.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">17.4 Direct Recourse &amp; Indemnity</h3>
+              <p>
+                The Client / Job Provider agrees that all legal claims, disputes, demands for rectification, or financial compensation arising out of or related to the tendered works must be pursued exclusively against the appointed Multi-Trade Contractor. The Client agrees to fully indemnify and hold harmless the Platform against any third-party claims, costs, or legal fees resulting from contractor default or failure to perform.
+              </p>
+            </section>
           </div>
         </div>
       </main>

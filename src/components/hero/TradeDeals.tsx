@@ -4,7 +4,7 @@ import evChargerDeal from "@/assets/trade-deals/ev-charger.jpg";
 import houseRewireDeal from "@/assets/trade-deals/house-rewire.jpg";
 import suspendedCeilingsDeal from "@/assets/trade-deals/suspended-ceilings.jpg";
 
-// Each image is a complete card design (header, offer, checklist and CTA), cropped to an identical 440×780.
+// Each image is a complete card design (header, offer, checklist and CTA), cropped to an identical 282×432.
 const TRADE_DEALS = [
   {
     title: "Suspended Ceilings",
@@ -14,12 +14,12 @@ const TRADE_DEALS = [
   {
     title: "EV Charger Installation",
     image: evChargerDeal,
-    alt: "Need an EV charger installed? Installed within 14 days or £100 off. Fully qualified electricians. Safe, compliant installation. Receive a free consultation.",
+    alt: "Need an EV charger installed? Installed within 14 days or £100 off. Fully qualified electricians. Safe, compliant installations. Receive a free consultation.",
   },
   {
     title: "Full House Rewire",
     image: houseRewireDeal,
-    alt: "Need a full house rewire? Save up to 15%. Fully qualified and insured. Minimal disruption to your home. Receive a free consultation.",
+    alt: "Need a full house rewire? Save up to 10%. Fully qualified team. Minimal disruption to your home. Receive a free consultation.",
   },
 ];
 
@@ -54,8 +54,8 @@ export default function TradeDeals() {
                 <img
                   src={deal.image}
                   alt={deal.alt}
-                  width={440}
-                  height={780}
+                  width={282}
+                  height={432}
                   loading="lazy"
                   className="w-full h-auto"
                 />
