@@ -349,6 +349,30 @@ const Terms = () => {
                 The Client / Job Provider agrees that all legal claims, disputes, demands for rectification, or financial compensation arising out of or related to the tendered works must be pursued exclusively against the appointed Multi-Trade Contractor. The Client agrees to fully indemnify and hold harmless the Platform against any third-party claims, costs, or legal fees resulting from contractor default or failure to perform.
               </p>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-bold text-foreground mb-3">18. Printed Marketing Guides, Physical Mailers &amp; Content Disclaimer</h2>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">18.1 General Informational Purposes Only</h3>
+              <p>
+                All marketing guides, brochures, letters, flyers, and educational materials published or distributed by the Platform (<a href="https://completemyproject.co.uk" target="_blank" rel="noopener noreferrer" className="text-oak-600 font-semibold underline hover:text-oak-700">completemyproject.co.uk</a>), whether in print or digital format, are provided strictly for general informational and promotional purposes only. Nothing contained within these materials constitutes formal legal, financial, tax, contractual, or certified construction compliance advice. Readers and Multi-Trade Contractors must not rely upon the content of any marketing guide as a substitute for independent advice from a qualified solicitor, accountant, or accredited regulatory body.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">18.2 Exclusion of Content Reliance Liability</h3>
+              <p>
+                While the Platform endeavors to ensure that general industry information is accurate at the time of publication, it makes no representations, warranties, or guarantees (express or implied) that the content is complete, up to date, or suitable for any specific business or project. To the fullest extent permitted under the laws of England and Wales, the Platform accepts zero legal or financial liability for any loss, business failure, regulatory fine, or damages resulting from any person or business acting or refraining from acting in reliance on information contained within our marketing guides or letters.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">18.3 Physical Format, Staples &amp; Child Safety</h3>
+              <p>
+                Physical promotional materials distributed by the Platform may contain standard commercial paper edges, folds, and metal staples or bindings. Upon delivery to a residential or commercial address, the recipient assumes full responsibility for the safe handling, storage, and disposal of all printed items. Because brochures and mailers may contain small metal components (such as staples), recipients must ensure that all marketing materials are kept out of reach of young children and pets at all times to prevent choking, ingestion, or accidental injury.
+              </p>
+
+              <h3 className="font-display text-lg font-bold text-foreground mt-6 mb-3">18.4 Limitation of Liability for Physical Materials</h3>
+              <p>
+                To the maximum extent permitted under the laws of England and Wales, the Platform accepts no liability for minor, incidental, or accidental injuries resulting from the ordinary handling of printed mailers (including, without limitation, paper cuts or minor abrasions), nor for any injury, ingestion, or damage arising from the recipient's failure to supervise children or safely store/dispose of stapled materials after delivery. Nothing in these Terms excludes or limits liability where it would be unlawful to do so under UK law.
+              </p>
+            </section>
           </div>
         </div>
       </main>
